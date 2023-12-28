@@ -54,12 +54,18 @@ class Cart:
 
     def get_total_price(self):
         total = 0
+        product_cache = {}  # Cache to store product information
+
         for product_id, item in self.cart.items():
-            if item["modification_id"] == 0:
+            if product_id not in product_cache:
                 product = poster.get_product(product_id)
+                product_cache[product_id] = product
+
+            product = product_cache[product_id]
+
+            if item["modification_id"] == 0:
                 total += int(product['sources'][0]['price']) * int(item['quantity'])
             else:
-                product = poster.get_product(product_id)
                 try:
                     if product["modifications"]:
                         for modification in product["modifications"]:
@@ -68,9 +74,14 @@ class Cart:
                                 break
                 except:
                     if product["group_modifications"]:
-                        for modification in product["group_modifications"][0]["modifications"]:
-                            if modification['dish_modification_id'] == int(item["modification_id"]):
-                                price = str(modification['price']) + "00"
-                                total += int(price) * int(item['quantity'])
-                                break
+                        if product['category_name'] == "COMBO":
+                            total += int(product['price']["1"]) * int(item['quantity'])
+                        else:
+                            for modification in product["group_modifications"][0]["modifications"]:
+                                if modification['dish_modification_id'] == int(item["modification_id"]):
+                                    price = str(modification['price']) + "00"
+                                    total += int(price) * int(item['quantity'])
+                                    break
+
         return total
+

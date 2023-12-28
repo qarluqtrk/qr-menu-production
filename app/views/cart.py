@@ -46,6 +46,7 @@ def cart_view(request):
                 cart.remove(cart_item)
 
     cart_total = cart.get_total_price()
+    print(cart_details)
 
     return render(request, 'app/cart.html', {'cart_details': cart_details, 'cart_total': str(cart_total)})
 
@@ -90,3 +91,21 @@ def delete_cart_item(request, product_id):
     cart = Cart(request)
     cart.remove(product_id)
     return JsonResponse({"status": "success", "cart_total": str(cart.get_total_price())})
+
+
+def make_order(request):
+    cart = Cart(request)
+    cart_items = cart.get_cart()
+    # print(cart_items)
+    products = []
+    for cart_item in cart_items:
+        if cart_items[f"{cart_item}"]['modification_id'] is 0:
+            products.append({"product_id": cart_item, "count": cart_items[cart_item]['quantity']})
+        else:
+            products.append({"product_id": cart_item,
+                             "modification": [{"m": str(cart_items[f"{cart_item}"]["modification_id"]), "a": 1},],
+                             "count": cart_items[cart_item]['quantity']})
+    print(products)
+    poster.create_dine_in_order(products)
+    a = cart.clear()
+    return JsonResponse({"status": "success"})

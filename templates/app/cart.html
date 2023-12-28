@@ -69,13 +69,13 @@
                                     : {{ cart_detail.quantity }}</li>
                                 {% if cart_detail.modification_id is not 0 %}
                                     {% if cart_detail.info.group_modifications %}
-                                    	{% for modification in cart_detail.info.group_modifications.0.modifications %}
-                                    		{% if cart_detail.modification_id == modification.dish_modification_id %}
+                                        {% for modification in cart_detail.info.group_modifications.0.modifications %}
+                                            {% if cart_detail.modification_id == modification.dish_modification_id %}
                                                 <li>{{ modification.name }}</li>
-                                    		{% endif %}
-                                    	{% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
 
-                                    {% endif %} 
+                                    {% endif %}
                                 {% endif %}
                             </ul>
 
@@ -90,11 +90,16 @@
                                                     {% endif %}
                                                 {% endfor %}
                                             {% else %}
-                                                {% for modification in cart_detail.info.group_modifications.0.modifications %}
-                                                    {% if modification.dish_modification_id == cart_detail.modification_id %}
-                                                        <span class="price-number">{{ modification.price }}</span>
-                                                    {% endif %}
-                                                {% endfor %}
+                                                {% if cart_detail.info.category_name == "COMBO" %}
+                                                    <span class="price-number">{{ cart_detail.info.price.1|slice:":-2" }}</span>
+                                                {% else %}
+                                                    {% for modification in cart_detail.info.group_modifications.0.modifications %}
+                                                        {% if modification.dish_modification_id == cart_detail.modification_id %}
+                                                            <span class="price-number">{{ modification.price }}</span>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+
                                             {% endif %}
 
                                         {% else %}
@@ -130,7 +135,7 @@
         <h6>Umumiy narx</h6>
         <h2 id="cart-total"><span class="price-number">{{ cart_total|slice:":-2" }}</span> so'm</h2>
     </div>
-    <a href="checkout.html" class="btn btn-lg theme-btn pay-btn mt-0">Checkout</a>
+    <a href="#success" class="btn btn-lg theme-btn pay-btn mt-0">Jo'natish</a>
 </div>
 <!-- cart bottom end -->
 
@@ -138,6 +143,25 @@
 <section class="panel-space"></section>
 <!-- panel-space end -->
 
+
+<div class="modal fade success-modal" id="success" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="confirm-title text-center">
+                    <img class="img-fluid confirm-offer" src="{% static "assets/images/gif/success.gif" %}"
+                         alt="success-payment"/>
+
+                    <h2 class="theme-color text-center fw-medium mt-2">Buyurtmangiz jo'natildi</h2>
+                    <h5 class="light-text fw-normal lh-base text-center w-100 mt-2 mx-auto">Buyurtmangizni ofitsiant
+                        tasdiqlashini kuting</h5>
+                </div>
+
+                <a href="/" class="btn theme-btn w-100 mt-4" role="button">Menuga qaytish</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
@@ -149,6 +173,26 @@
 
 <!-- script js -->
 <script src={% static "assets/js/script.js" %}></script>
+<script>
+    // Function to show the success modal
+    function showSuccessModal() {
+        $('#success').modal('show');  // Assuming you are using Bootstrap modal
+    }
+
+    // Event handler for the "Jo'natish" link click
+    $(document).ready(function () {
+        $('a[href="#success"]').click(function (e) {
+            $.ajax({
+                type: "GET",
+                url: "/make-order/",
+                success: function (data) {
+                    e.preventDefault();  // Prevent the default behavior of the link
+                    showSuccessModal();   // Call the function to show the success modal
+                }
+            })
+        });
+    });
+</script>
 
 <script>
     /*====================

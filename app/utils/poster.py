@@ -66,6 +66,21 @@ class PosterAPI:
         response = requests.get(url).json()
         return response['response']
 
+    def create_dine_in_order(self, products):
+        url = self.base_url + '/api/' + 'incomingOrders.createIncomingOrder' + '?token=' + self.api_key
+        incoming_order = {
+            "spot_id": 1,
+            "phone": "+998918112777",
+            "service_mode": "1",
+            "products": products,
+            "source_id": 1,
+            "comment": "table id: 1",
+            # "skip_phone_validation": True,
+        }
+        response = requests.post(url, json=incoming_order).json()
+        print(response)
+        return response['response']
+
 
 # poster = PosterAPI('914586:59197929114cb322596a0588f408b3dc')
 poster = PosterAPI('152255:3693466775bf67a3749ad3e3d61da514')
