@@ -1,0 +1,166 @@
+/*=============================
+     order css start
+===============================*/
+.order-id {
+    border-bottom: 1px dashed rgba(var(--black), 0.07);
+    padding-bottom: 20px;
+}
+
+.order-tracking {
+    padding: 20px;
+    margin-top: 25px;
+    background: rgba(var(--light-bg), 1);
+    border-radius: 10px;
+
+    h2 {
+        color: rgba(var(--theme-color), 1);
+    }
+
+    .tracking-place {
+        margin-top: 15px;
+    }
+
+    .order-process {
+        position: relative;
+        display: flex;
+        align-items: center;
+        border-radius: 100%;
+        margin-bottom: 30px;
+
+        span {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(var(--white), 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100%;
+            position: relative;
+            z-index: 0;
+
+            .process-icon {
+                --Iconsax-Color: rgba(var(--theme-color), 1);
+                --Iconsax-Size: 20px;
+            }
+
+            .pending-icon {
+                --Iconsax-Color: rgba(var(--light-text), 1);
+                --Iconsax-Size: 20px;
+            }
+
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: -33px;
+                left: 3px;
+                width: 30px;
+                border: 1px dashed rgba(var(--light-text), 1);
+                transform: rotate(90deg) translate(-50%, -50%);
+
+                [dir="rtl"] & {
+                    left: unset;
+                    right: 3px;
+                }
+
+            }
+
+        }
+
+        &.completed {
+            span {
+                background-color: rgba(18, 38, 54, 1);
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 48px;
+                    height: 48px;
+                    background-image: url(../images/icons/completed.png);
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    z-index: -1;
+                    opacity: 1;
+                }
+            }
+        }
+
+        &.ongoing {
+            >div {
+                .ongoing-border {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 0;
+
+                    &::after {
+                        z-index: -1;
+                        content: "";
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 48px;
+                        height: 48px;
+                        background-color: rgba(155, 163, 170, 0.5);
+                        border-radius: 100%;
+                    }
+                }
+            }
+        }
+
+        .process-details {
+            h4 {
+                font-weight: 400;
+                color: rgba(var(--theme-color), 1);
+                margin-bottom: 4px;
+            }
+
+            h5 {
+                font-weight: 400;
+                color: rgba(var(--light-text), 1);
+            }
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+
+            span {
+                &:before {
+                    display: none !important;
+                }
+            }
+        }
+    }
+}
+
+.bill-details {
+    .total-detail {
+        padding: 15px;
+        background-color: rgba(var(--light-bg), 1);
+        border-radius: 10px;
+
+        .sub-total {
+            h4 {
+                color: rgba(var(--theme-color), 1);
+            }
+        }
+
+        .grand-total {
+            border-top: 1px solid rgba(var(--black), 0.07);
+
+            h4 {
+                color: rgba(var(--theme-color), 1);
+            }
+
+            h5 {
+                color: rgba(var(--theme-color), 1);
+            }
+        }
+    }
+}

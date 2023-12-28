@@ -1,0 +1,31 @@
+/*========================
+    Variable CSS start
+==========================*/
+/* font family */
+$Poppins: "Poppins",
+sans-serif;
+
+/* color variables */
+:root {
+  --theme-color: 18, 38, 54;
+  --white: 255, 255, 255;
+  --black: 0, 0, 0;
+  --light-text: 155, 163, 170;
+  --error-color: 240, 73, 73;
+  --success-color: 25, 135, 84;
+  --box-bg: 32, 51, 66;
+  --light-bg: 246, 246, 247;
+  --secondary-color: 255, 193, 7;
+}
+
+.dark {
+  --white: 7, 20, 31;
+  --black: 255, 255, 255;
+  --theme-color: 255, 255, 255;
+  --light-text: 155, 163, 170;
+  --box-bg: 60, 60, 60;
+  --light-bg: 18, 38, 54;
+  --secondary-color: 255, 193, 7;
+  --error-color: 240, 73, 73;
+  --success-color: 25, 135, 84;
+}

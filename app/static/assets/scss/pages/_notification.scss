@@ -1,0 +1,58 @@
+/*=============================
+     notification css start
+===============================*/
+.notification-product-box {
+    background: rgba(var(--light-bg), 1);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+
+    .notification-product-img {
+        width: 49px;
+        height: 49px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(var(--white), 1);
+        border-radius: 8px;
+
+
+        .img {
+            width: 45px;
+        }
+    }
+
+    .notification-product-details {
+        display: flex;
+        align-items: center;
+        width: calc(100% - 49px - 10px);
+
+        h4 {
+            font-weight: 500;
+            line-height: 1.2;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color: rgba(var(--theme-color), 1);
+        }
+
+        h5 {
+            color: rgba(var(--light-text), 1);
+            font-weight: 400;
+            line-height: 1;
+            margin-top: 5px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        h3 {
+            del {
+                font-size: 12px;
+            }
+        }
+
+    }
+}

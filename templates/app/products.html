@@ -1,0 +1,285 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="afc"/>
+    <meta name="keywords" content="afc"/>
+    <meta name="author" content="afc"/>
+    <link rel="icon" href={% static "assets/images/logo/favicon.png" %} type="image/x-icon"/>
+    <title>afc app</title>
+    <meta name="theme-color" content="#122636"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <!--Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"/>
+
+    <!-- iconsax css -->
+    <link rel="stylesheet" type="text/css" href={% static "assets/css/vendors/iconsax.css" %}/>
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" id="rtl-link" type="text/css" href={% static "assets/css/vendors/bootstrap.min.css" %}/>
+    <!-- Theme css -->
+    <link rel="stylesheet" id="change-link" type="text/css" href={% static "assets/css/style.css" %}/>
+</head>
+
+<body>
+<!-- header start -->
+<header class="section-t-space">
+    <div class="custom-container">
+        <div class="header-panel">
+            <a href="{% url 'index' %}">
+                <i class="iconsax back-btn" data-icon="arrow-left"></i>
+            </a>
+            <h3>{{ products.0.category_name }}</h3>
+            <a href="/cart/" class="notification">
+                <div class="icon">
+                    <img src={% static "assets/images/svg/bag-fill.svg" %} alt="bag"/>
+                </div>
+            </a>
+        </div>
+    </div>
+</header>
+<!-- header end -->
+
+<!-- shop section start -->
+<section class="section-b-space">
+    <div class="custom-container">
+        <div class="row g-3">
+            {% for product in products %}
+                {% if product.modifications %}
+                    <div class="col-6">
+                        <div class="product-box">
+                            <div class="product-box-img">
+                                <a href="/product/{{ product.product_id }}"> <img class="img"
+                                                                                  src="https://joinposter.com{{ product.photo }}"
+                                                                                  alt="p1"/></a>
+
+                                <div class="cart-box">
+                                    <button type="button" class="cart-bag" data-bs-toggle="modal"
+                                            data-bs-target="#modificationModal"
+                                            data-product-id="{{ product.product_id }}"><i class="iconsax bag"
+                                                                                          data-icon="basket-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-box-detail">
+                                <h4>{{ product.product_name }}</h4>
+                                <div class="bottom-panel">
+                                    <div class="price">
+                                        <h4>{{ product.modifications.0.sources.0.price|slice:":-2" }} <span
+                                                class="pev-price">so'mdan</span></h4>
+                                    </div>
+                                    <div class="rating">
+                                        <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
+                                        <h6>4.5</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% elif product.group_modifications %}
+                    <div class="col-6">
+                        <div class="product-box">
+                            <div class="product-box-img">
+                                <a href="/product/{{ product.product_id }}"> <img class="img"
+                                                                                  src="https://joinposter.com{{ product.photo }}"
+                                                                                  alt="p1"/></a>
+
+                                <div class="cart-box">
+                                    <button type="button" class="cart-bag" data-bs-toggle="modal"
+                                            data-bs-target="#modificationModal"
+                                            data-product-id="{{ product.product_id }}"><i class="iconsax bag"
+                                                                                          data-icon="basket-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="product-box-detail">
+                                <h4>{{ product.product_name }}</h4>
+                                <div class="bottom-panel">
+                                    <div class="price">
+                                        <h4>{{ product.group_modifications.0.modifications.0.price|slice:":-2" }} <span
+                                                class="pev-price">so'mdan</span></h4>
+                                    </div>
+                                    <div class="rating">
+                                        <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
+                                        <h6>4.5</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-6">
+                        <div class="product-box">
+                            <div class="product-box-img">
+                                <a href="/product/{{ product.product_id }}"> <img class="img"
+                                                                                  src="https://joinposter.com{{ product.photo }}"
+                                                                                  alt="p1"/></a>
+
+                                <div class="cart-box">
+                                    <a href="/add-to-cart/{{ product.product_id }}/" class="cart-bag">
+                                        <i class="iconsax bag" data-icon="basket-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product-box-detail">
+                                <h4>{{ product.product_name }}</h4>
+                                <div class="bottom-panel">
+                                    <div class="price">
+                                        <h4>{{ product.spots.0.price|slice:":-2" }} <span class="pev-price">so'm</span>
+                                        </h4>
+                                    </div>
+                                    <div class="rating">
+                                        <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
+                                        <h6>4.5</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<!-- shop section end -->
+
+<!-- Modal -->
+<div class="modal fade" id="modificationModal" tabindex="-1" aria-labelledby="modificationModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- header start -->
+            <header class="section-t-space">
+                <div class="custom-container">
+                    <div class="header-panel">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h3>Tanlang</h3>
+                    </div>
+                </div>
+            </header>
+            <!-- header end -->
+
+            <!-- shipping section start -->
+            <section>
+                <div class="custom-container">
+                    <div class="row g-3" id="modificationOptionsContainer">
+
+                    </div>
+                    <a href="checkout.html" class="btn theme-btn w-100 shipping" style="margin-bottom: 10px">apply</a>
+                </div>
+            </section>
+            <!-- shipping section end -->
+
+        </div>
+    </div>
+</div>
+
+<!-- iconsax js -->
+<script src={% static "assets/js/iconsax.js" %}></script>
+
+<!-- bootstrap js -->
+<script src={% static "assets/js/bootstrap.bundle.min.js" %}></script>
+
+<!-- script js -->
+<script src={% static "assets/js/script.js" %}></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var myModal = new bootstrap.Modal(document.getElementById('modificationModal'));
+
+        // Event listener for Apply Modifications button
+        //document.getElementById('applyModifications').addEventListener('click', function () {
+        // Add logic to handle selected modifications and apply them
+        // You can use JavaScript to fetch selected modifications and update the UI
+        // For example, update a div with the selected modifications
+        //  myModal.hide();
+        //});
+
+        // Event listener for modal show event
+        myModal._element.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var productId = button.getAttribute('data-product-id');
+            var dynamicContentContainer = document.getElementById('modificationOptionsContainer');
+
+            $.ajax({
+                type: "GET",
+                url: "/product-json/" + productId,
+                success: function (data) {
+                    console.log(data)
+                    var dynamicContent = '';
+
+                    // Loop through each item in the JSON data
+                    if (data['product']['group_modifications']) {
+                        for (item of data['product']['group_modifications'][0]['modifications']) {
+                            console.log(item)
+                            dynamicContent += `
+        <div class="col-12">
+          <div class="shipping-box">
+            <a href="#">
+              <i class="iconsax icons" data-icon="box-tick"></i>
+            </a>
+            <div class="shipping-details">
+              <div class="shipping-info">
+                <h4>${item.name}</h4>
+                <h5>${item.price}</h5>
+              </div>
+              <div class="price">
+                <div class="form-check form-check-reverse">
+                  <label class="form-check-label" for="radio${item.dish_modification_id}">$${item.price}</label>
+                  <input class="form-check-input" type="radio" name="exampleRadio" id="radio${item.dish_modification_id}" value="option${item.dish_modification_id}"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+                        }
+                    } else if (data['product']['modifications']) {
+                        for (item of data['product']['modifications']) {
+                            console.log(item)
+                            dynamicContent += `
+        <div class="col-12">
+          <div class="shipping-box">
+            <a href="#">
+              <i class="iconsax icons" data-icon="box-tick"></i>
+            </a>
+            <div class="shipping-details">
+              <div class="shipping-info">
+                <h4>${item.modificator_name}</h4>
+                <h5>${String(item.sources[0]['price']).slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm</h5>
+              </div>
+              <div class="price">
+                <div class="form-check form-check-reverse">
+                  <label class="form-check-label" for="radio${item.dish_modification_id}"></label>
+                  <input class="form-check-input" type="radio" name="exampleRadio" id="radio${item.dish_modification_id}" value="option${item.dish_modification_id}"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+                        }
+                    }
+
+                    // Update the content within the modal
+                    dynamicContentContainer.innerHTML = dynamicContent;
+
+                    // Show the modal
+                    myModal.show();
+                }
+            })
+        });
+    });
+</script>
+
+</body>
+</html>

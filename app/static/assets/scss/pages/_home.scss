@@ -1,0 +1,21 @@
+/*=============================
+     home CSS start
+===============================*/
+.categories-item {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    color: rgba(var(--theme-color), 1);
+    background-color: rgba(var(--light-bg), 1);
+    padding: 10px;
+    border-radius: 5px;
+
+    [dir="rtl"] & {
+        direction: rtl;
+    }
+
+    &.active {
+        background: rgba(var(--theme-color), 1);
+        color: rgba(var(--white), 1);
+    }
+}

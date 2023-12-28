@@ -1,0 +1,216 @@
+/*=====================
+    Dark CSS start
+==========================*/
+body {
+    &.dark {
+        .offcanvas {
+            &.addtohome-popup {
+                .btn-close {
+                    filter: invert(1);
+                }
+
+                .offcanvas-body {
+                    background-color: rgba(31, 48, 62, 1);
+                }
+            }
+        }
+
+        .coupon-box {
+            .coupon-right {
+                mix-blend-mode: overlay;
+            }
+
+            .coupon-discount {
+                &::after {
+                    background-color: rgba(14, 41, 61, 1);
+                }
+
+                &::before {
+                    background-color: rgba(14, 41, 61, 1);
+                }
+            }
+        }
+
+        .header {
+            .head-content {
+                .sidebar-btn {
+                    background-color: rgba(var(--light-bg), 1);
+                }
+            }
+
+            .notification {
+                background-color: rgba(var(--light-bg), 1);
+            }
+        }
+
+        .product-box {
+            .product-box-img {
+                .img {
+                    background-color: rgba(31, 48, 62, 1);
+                }
+
+                .cart-box {
+                    background-color: rgba(31, 48, 62, 1);
+                }
+            }
+        }
+
+        .horizontal-product-box {
+            .horizontal-product-img {
+                background-color: rgba(31, 48, 62, 1);
+            }
+        }
+
+        .navbar-menu {
+            background-color: rgba(var(--light-bg), 1);
+        }
+
+        .payment-list {
+            .payment-card-box {
+                .payment-detail {
+                    .add-img {
+                        .img1 {
+                            filter: invert(1);
+                        }
+                    }
+                }
+            }
+        }
+
+        .order-tracking {
+            .order-process {
+                &.completed {
+                    span {
+                        background-color: rgba(0, 0, 0, 1);
+
+                        &::after {
+                            filter: invert(1);
+                        }
+                    }
+                }
+            }
+        }
+
+        .color-option {
+            background-color: rgba(18, 38, 53, 1);
+        }
+
+        .invoice-btn {
+            background-color: #fff;
+        }
+
+        .notification-product-box {
+            .notification-product-img {
+                .notification-icons {
+                    filter: brightness(50);
+                }
+            }
+        }
+
+        .navbar-menu {
+            ul {
+                li {
+                    &.active {
+                        .icon {
+                            .active {
+                                filter: brightness(50);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .help-accordion {
+            .accordion-item {
+                .accordion-body {
+                    background-color: rgba(31, 48, 62, 1);
+                }
+            }
+        }
+
+        .categories-item {
+            .categories-img {
+                filter: invert(1);
+            }
+        }
+
+        .similer-product {
+            background-color: rgba(31, 48, 62, 1);
+        }
+
+        .my-review-offcanvas {
+            .review-head {
+                .btn-close {
+                    filter: invert(1);
+                }
+            }
+        }
+
+        .product-details-effect {
+            display: none;
+        }
+
+        .product-details-effect-dark {
+            position: absolute;
+            width: 100%;
+            height: 28px;
+            z-index: -1;
+            top: 0;
+        }
+
+        .delivery-sec {
+            .input-group {
+                .form-control {
+                    background-color: rgba(31, 48, 62, 1);
+                    border: 1px solid rgba(var(--light-text), 0.3);
+
+                    &::placeholder {
+                        color: rgba(var(--light-text), 1);
+                    }
+                }
+
+                .theme-btn {
+                    background-color: rgba(var(--theme-color), 0.7);
+                }
+            }
+        }
+
+        .notification-setting {
+            background-color: rgba(31, 48, 62, 1);
+        }
+
+        .empty-img {
+            filter: invert(1) grayscale(1);
+        }
+
+        .details-accordion {
+            .accordion-item {
+                .accordion-header {
+                    .accordion-button {
+                        &::after {
+                            filter: invert(1) grayscale(1);
+                        }
+                    }
+                }
+
+                .accordion-body {
+                    .input-group {
+                        .form-control {
+                            background-color: rgba(31, 48, 62, 1);
+                            border: 1px solid rgba(var(--light-text), 0.3);
+
+                            &::placeholder {
+                                color: rgba(var(--light-text), 1);
+                            }
+                        }
+
+                        .theme-btn {
+                            background-color: rgba(var(--theme-color), 0.7);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

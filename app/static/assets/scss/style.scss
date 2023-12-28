@@ -1,0 +1,44 @@
+/*utils scss files */
+@import "utils/animation";
+@import "utils/variables";
+
+/* base scss files */
+@import "base/reset";
+@import "base/typography";
+
+/* components scss files*/
+@import "components/accordion";
+@import "components/_banner";
+@import "components/button";
+@import "components/form";
+@import "components/offcanvas";
+@import "components/product-box";
+@import "components/range-slider";
+@import "components/ratio";
+@import "components/title";
+
+
+/* layout scss files */
+@import "layout/header";
+@import "layout/nav";
+
+/* pages */
+@import "pages/authentication";
+@import "pages/categories-page";
+@import "pages/cart";
+@import "pages/coupon";
+@import "pages/empty-page";
+@import "pages/home";
+@import "pages/help";
+@import "pages/notification";
+@import "pages/order";
+@import "pages/page-list";
+@import "pages/payment";
+@import "pages/product-details";
+@import "pages/profile";
+@import "pages/shipping";
+@import "pages/terms-conditions";
+
+
+/* themes */
+@import "themes/dark";

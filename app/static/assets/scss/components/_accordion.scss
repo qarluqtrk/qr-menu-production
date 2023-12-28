@@ -1,0 +1,270 @@
+/*=====================
+    accordion CSS start
+==========================*/
+.help-accordion {
+    .accordion-item {
+        border: none;
+
+        .accordion-header {
+            .accordion-button {
+                font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
+                background-color: rgba(var(--light-bg), 1);
+                color: rgba(var(--theme-color), 1);
+
+                &:not(.collapsed) {
+                    &::after {
+                        background-image: none;
+                    }
+                }
+
+                &:focus {
+                    box-shadow: none;
+                }
+            }
+        }
+
+        .accordion-body {
+            text-align: justify;
+            font-size: 13px;
+            line-height: 1.5;
+            color: rgba(var(--light-text), 1);
+
+            ul {
+                li {
+                    display: list-item;
+                    list-style-type: decimal;
+                    padding: 10px 0;
+                    text-align: justify;
+                    font-size: 13px;
+                    line-height: 1.5;
+                    color: rgba(var(--light-text), 1);
+                }
+            }
+        }
+    }
+}
+
+.details-accordion {
+    .accordion-item {
+        background: transparent;
+        border: none;
+
+        .accordion-button {
+            cursor: pointer;
+            background: transparent;
+            display: flex;
+            color: rgba(var(--theme-color), 1);
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 0;
+            padding-right: 0;
+
+            &:focus {
+                box-shadow: none;
+            }
+
+            &:not(.collapsed) {
+                box-shadow: unset;
+            }
+        }
+
+        .accordion-button {
+            &:not(.collapsed) {
+                &::after {
+                    filter: grayscale(1);
+                }
+            }
+        }
+
+        .accordion-body {
+            padding: 16px 0;
+            border-top: 1px solid rgba(var(--theme-color), 0.09);
+
+            .table {
+                border: 1px solid rgba(var(--black), 0.07);
+
+                thead {
+                    tr {
+                        th {
+                            font-size: 13px;
+                            font-weight: 400;
+                            color: rgba(var(--light-text), 1);
+                        }
+                    }
+                }
+
+                tbody {
+                    tr {
+                        td {
+                            font-size: 14px;
+                            font-weight: 500;
+                            color: rgba(var(--theme-color), 1);
+                        }
+                    }
+                }
+            }
+
+            .input-group {
+                border-radius: 8px;
+
+                .form-control {
+                    height: 40px;
+                    background-color: rgba(var(--white), 1);
+
+                    &:focus {
+                        box-shadow: none;
+                        border-color: rgba(var(--theme-color), 0.07);
+                    }
+                }
+
+                .theme-btn {
+                    height: 40px;
+                    margin-top: 0;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+            }
+
+            .address-type {
+                display: flex;
+                gap: 7px;
+                padding: 12px;
+                margin-top: 15px;
+                background-color: rgba(var(--white), 1);
+                border-radius: 10px;
+
+
+                li {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding-inline: 10px;
+
+                    @media (max-width: 380px) {
+                        padding-inline: 0;
+                    }
+
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        right: 7px;
+                        border: 1px solid rgba(var(--black), 0.07);
+                        transform: translateY(-50%);
+                        top: 50%;
+                        background-color: rgba(0, 0, 0, 0.07);
+                        width: 1px;
+                        height: 30px;
+
+                        [dir="rtl"] & {
+                            right: unset;
+                            left: -18px;
+                        }
+
+                        @media (max-width: 350px) {
+                            display: none;
+                        }
+
+                        @media (min-width: 600px) {
+                            right: -50px;
+                        }
+
+                        @media (min-width: 550px) {
+                            right: -30px;
+                        }
+
+                        @media (min-width: 500px) {
+                            right: -20px;
+                        }
+
+                        @media (min-width: 450px) {
+                            right: -10px;
+                        }
+
+                        @media (min-width: 425px) {
+                            right: -5px;
+                        }
+
+                        @media (min-width: 375px) {
+                            right: 0;
+                        }
+                    }
+
+                    &:last-child {
+                        &::after {
+                            display: none;
+                        }
+                    }
+
+                    .icon {
+                        --Iconsax-Color: rgba(var(--theme-color), 1);
+                    }
+
+                    h6 {
+                        color: rgba(var(--theme-color), 1);
+                        font-weight: 400;
+                    }
+                }
+            }
+
+            .product-description {
+                p {
+                    padding: 12px;
+                    margin-top: 0;
+                    text-align: justify;
+                    color: rgba(var(--light-text), 1);
+                    background-color: rgba(var(--white), 1);
+                    border-radius: 8px;
+
+                    span {
+                        font-weight: 600;
+                        color: rgba(var(--light-text), 1);
+                    }
+
+                }
+            }
+
+            .reviews-display {
+                .reviews-box {
+                    margin-top: 12px;
+                    padding: 12px;
+                    background-color: rgba(var(--white), 1);
+                    border-radius: 8px;
+
+                    .profile-pic {
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 100%;
+                        object-fit: cover;
+                    }
+
+                    h4 {
+                        font-weight: 400;
+                    }
+
+                    .stars {
+                        width: 14px;
+                    }
+
+                    p {
+                        margin-top: 12px;
+                        color: rgba(var(--light-text), 1);
+                    }
+                }
+
+                .my-review {
+                    display: inline-block;
+                    padding: 15px 0;
+                    font-weight: 500;
+                    font-size: 14px;
+                    width: 100%;
+                    color: rgba(var(--theme-color), 1);
+                }
+            }
+        }
+    }
+}

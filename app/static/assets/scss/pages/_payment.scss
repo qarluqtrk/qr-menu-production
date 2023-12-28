@@ -1,0 +1,170 @@
+/*=============================
+    payment CSS start
+===============================*/
+.payment-method {
+    .payment-list {
+        .payment-card-box {
+            flex-wrap: wrap;
+            padding: 0 15px;
+            width: 100%;
+            background: rgba(var(--white), 1);
+            border-radius: 10px;
+            border: 1px solid rgba(var(--theme-color), 0.07);
+            box-shadow: 0px 2px 6px rgba(var(--black), 0.04);
+
+
+            .payment-detail {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                width: 100%;
+                padding: 15px 0;
+                border-bottom: 1px dashed rgba(var(--black), 0.07);
+
+                .form-label {
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    width: 100%;
+                    margin-bottom: 0;
+                    cursor: pointer;
+
+                    .add-img {
+                        width: 35px;
+                        height: 30px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .img {
+                            width: calc(100% - 50px);
+                            height: 30px;
+                        }
+
+                        .add-square-img {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 22px;
+                            border: 1.5px solid;
+                            border-radius: 10px;
+                            width: 100%;
+                        }
+                    }
+
+
+                    span {
+                        display: flex;
+                        flex-direction: column;
+
+                        .card-heading {
+                            color: rgba(var(--theme-color), 1);
+                            font-size: 13px;
+                        }
+
+                        .card-sub-heading {
+                            color: rgba(var(--light-text), 1);
+                            font-size: 13px;
+                        }
+                    }
+                }
+
+
+
+
+                .form-check {
+                    padding: 0;
+
+                    .form-check-input {
+                        box-shadow: none;
+                        font-size: 18px;
+                    }
+
+                    .form-check-input:checked {
+                        background-color: rgba(18, 38, 54, 1);
+                        border-color: rgba(var(--theme-color), 1);
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    .new-card {
+        border-bottom: 1px dashed rgba(var(--black), 0.07);
+
+        h6 {
+            color: rgba(var(--theme-color), 1);
+            padding: 15px 0;
+            text-align: right;
+            text-decoration: underline;
+
+            [dir="rtl"] & {
+                text-align: left;
+            }
+        }
+    }
+}
+
+.debit-card {
+    position: relative;
+    background-image: url(../images/background/card.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    box-shadow: 0px 0px 13px rgba(var(--black), 0.14);
+    border-radius: 14px;
+
+    .card-details {
+        padding: 22px;
+
+        .card-name {
+            color: rgba(var(--white), 0.5);
+        }
+
+        .chip {
+            margin-top: 12px;
+        }
+
+        .ac-details {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            li {
+                h6 {
+                    font-weight: 400;
+                    color: rgba(225, 225, 225, 0.5);
+                }
+
+                h3 {
+                    font-weight: 700;
+                    color: rgba(225, 225, 225, 1);
+                    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+                }
+            }
+        }
+
+        .user-name {
+            margin-top: 15px;
+
+            h6 {
+                font-weight: 400;
+                color: rgba(225, 225, 225, 0.5);
+            }
+
+            h5 {
+                font-weight: 500;
+                color: rgba(225, 225, 225, 1);
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+
+            }
+        }
+    }
+}

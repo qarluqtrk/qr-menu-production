@@ -1,0 +1,78 @@
+/*=========================
+    Category page CSS start
+==========================*/
+.categories-list {
+    position: relative;
+
+    li {
+        display: flex;
+        background-color: rgba(var(--light-bg), 1);
+        margin-top: 15px;
+
+        a {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            h2 {
+                color: rgba(var(--theme-color), 1);
+                font-weight: 500;
+            }
+
+            h4 {
+                color: rgba(var(--light-text), 1);
+                font-weight: 400;
+                font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (768 - 320)));
+            }
+
+            .arrow {
+                margin-top: 25px;
+
+                .right-arrow {
+                    --Iconsax-Size: 28px;
+                    --Iconsax-Color: rgba(var(--theme-color), 1);
+                }
+            }
+
+            .categories-img {
+                z-index: 2;
+
+                img {
+                    width: 160px;
+                    height: 160px;
+                    object-fit: contain;
+                }
+            }
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            height: 100%;
+            z-index: -1;
+            border-radius: 8px;
+
+            [dir="rtl"] & {
+                left: unset;
+                right: 0;
+            }
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 15%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            background-color: rgba(var(--white), 1);
+            z-index: 0;
+
+            [dir="rtl"] & {
+                right: unset;
+                left: 0;
+            }
+        }
+    }
+}

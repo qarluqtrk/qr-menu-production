@@ -1,0 +1,82 @@
+/*=====================
+    Typography CSS start
+==========================*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $Poppins;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+  background-color: rgba(var(--white), 1);
+
+  & {
+    scrollbar-width: none;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 29px;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+h3 {
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+h4 {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+h5 {
+  font-size: 13px;
+  line-height: 1.2;
+  margin-bottom: 0;
+}
+
+h6 {
+  font-size: 12px;
+  line-height: 1.2;
+  margin-bottom: 0;
+}
+
+p {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+li {
+  list-style: none;
+  display: inline-block;
+  font-size: 14px;
+}

@@ -1,0 +1,40 @@
+/*===============================
+    terms-conditions CSS start
+=================================*/
+.terms-Conditions {
+    h2 {
+        font-weight: 600;
+        color: rgba(var(--theme-color), 1);
+    }
+
+    h3 {
+        font-weight: 500;
+        margin-top: 25px;
+        padding-top: 15px;
+        color: rgba(var(--theme-color), 1);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+        margin-top: 15px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: rgba(var(--light-text), 1);
+    }
+
+    ul {
+        padding-inline-start: 20px;
+        width: 100%;
+
+        li {
+            display: list-item;
+            list-style-type: disc;
+            color: rgba(var(--light-text), 1);
+
+            &::marker {
+                color: rgba(var(--theme-color), 1);
+            }
+
+        }
+    }
+}

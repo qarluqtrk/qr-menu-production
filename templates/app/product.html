@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="afc"/>
+    <meta name="keywords" content="afc"/>
+    <meta name="author" content="afc"/>
+    <link rel="icon" href={% static "assets/images/logo/favicon.png" %} type="image/x-icon"/>
+    <title>afc app</title>
+    <link rel="apple-touch-icon" href={% static "assets/images/logo/favicon.png" %}/>
+    <meta name="theme-color" content="#122636"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <!--Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"/>
+
+    <!-- iconsax css -->
+    <link rel="stylesheet" type="text/css" href={% static "assets/css/vendors/iconsax.css" %}/>
+    <!-- dropzone css -->
+    <link rel="stylesheet" type="text/css" href={% static "assets/css/vendors/dropzone.min.css" %}/>
+
+    <!-- swiper css -->
+    <link rel="stylesheet" type="text/css" href={% static "assets/css/vendors/swiper-bundle.min.css" %}/>
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" id="rtl-link" type="text/css" href={% static "assets/css/vendors/bootstrap.min.css" %}/>
+
+    <!-- Theme css -->
+    <link rel="stylesheet" id="change-link" type="text/css" href={% static "assets/css/style.css" %}/>
+</head>
+<body class="details-page details-page2">
+<!-- header start -->
+<header class="product2-header">
+    <div class="custom-container">
+        <div class="header-panel">
+            <a href="/products/{{ product.menu_category_id }}">
+                <i class="iconsax back-btn" data-icon="arrow-left"></i>
+            </a>
+            <h3>{{ product.category_name }}</h3>
+        </div>
+    </div>
+</header>
+<!-- header end -->
+
+<!-- product-image section start -->
+<section class="product2-image-section">
+    <div style="text-align: center;">
+        <img src="https://joinposter.com{{ product.photo }}" alt="p26"
+             style="margin: auto; display: block; border-radius: 100%;"/>
+    </div>
+</section>
+
+<!-- product-image section end -->
+
+<!-- product-details section start -->
+<section class="position-relative">
+    <img src={% static "assets/images/effect.png" %} class="img-fluid product-details-effect" alt="effect"/>
+    <img class="img-fluid product-details-effect-dark"
+         src={% static "assets/images/effect-dark.png" %} alt="effect-dark"/>
+    <div class="custom-container">
+        <div class="product-details">
+            <div class="product-name">
+                <h2 class="theme-color">{{ product.product_name }}</h2>
+                <!--<h6>20% OFF</h6>-->
+            </div>
+            <p class="mt-1">{{ product.product_production_description }}</p>
+
+            <div class="product-price">
+                {% if not product.modifications and not product.group_modifications %}
+                    <h3>{{ product.spots.0.price|slice:":-2" }}
+                        <span>so'm</span>
+                    </h3>
+                {% else %}
+                    <h3>
+                        <span></span>
+                    </h3>
+                {% endif %}
+
+                <div class="plus-minus">
+                    <i class="iconsax sub" data-icon="minus"></i>
+                    <input type="number" value="1" min="1" max="10"/>
+                    <i class="iconsax add" data-icon="add"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- similar product section starts -->
+<section class="similer-product">
+    <div class="custom-container">
+        <div class="title">
+            <h2>Shu kabilar</h2>
+            <a href="/products/{{ product.menu_category_id }}">Ko'proq Ko'rish</a>
+        </div>
+
+        <div class="swiper similer-product">
+            <div class="swiper-wrapper">
+                {% for similar_product in similar_products %}
+                	<div class="swiper-slide">
+                    <div class="product-box">
+                        <div class="product-box-img">
+                            <a href="/product/{{ similar_product.product_id }}"> <img class="img"
+                                                                 src="https://joinposter.com{{ similar_product.photo }}" %}
+                                                                         alt="p1"/></a>
+
+                            <div class="cart-box">
+                                <a href="cart.html" class="cart-bag">
+                                    <i class="iconsax bag" data-icon="basket-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-box-detail">
+                            <h4>Buddy Chair</h4>
+                            <h5>Modern saddle arms</h5>
+                            <div class="bottom-panel">
+                                <div class="price">
+                                    <h4>$14
+                                        <del class="pev-price">$20</del>
+                                    </h4>
+                                </div>
+                                <div class="rating">
+                                    <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
+                                    <h6>4.5</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- similar product section end -->
+
+<!-- panel-space start -->
+<section class="panel-space"></section>
+<!-- panel-space end -->
+
+<!-- cart box starts -->
+<section class="fixed-cart-btn section-b-space">
+    <div class="custom-container">
+        <a href="cart.html" class="cart-box-sec">
+            <div class="d-flex align-items-center gap-2">
+                <i class="iconsax bag" data-icon="basket-2"></i>
+                <h2>Savatga Qo'shish</h2>
+            </div>
+            <h2>$102.25</h2>
+        </a>
+    </div>
+</section>
+<!-- cart box end -->
+
+<!-- panel-space start -->
+<section class="panel-space"></section>
+<!-- panel-space end -->
+
+<!-- product-details section end -->
+
+<!-- swiper js -->
+<script src={% static "assets/js/swiper-bundle.min.js" %}></script>
+<script src={% static "assets/js/custom-swiper.js" %}></script>
+
+<!-- range-slider js -->
+<script src={% static "assets/js/range-slider.js" %}></script>
+
+<!-- dropzone js -->
+<script src={% static "assets/js/dropzone-min.js" %}></script>
+
+<!-- iconsax js -->
+<script src={% static "assets/js/iconsax.js" %}></script>
+
+<!-- bootstrap js -->
+<script src={% static "assets/js/bootstrap.bundle.min.js" %}></script>
+
+<!-- script js -->
+<script src={% static "assets/js/script.js" %}></script>
+</body>
+</html>

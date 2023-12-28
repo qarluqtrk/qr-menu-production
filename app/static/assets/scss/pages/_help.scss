@@ -1,0 +1,21 @@
+/*===============================
+    help CSS start
+=================================*/
+.help-center {
+    h2 {
+        margin-top: calc(20px + (25 - 20) * ((100vw - 320px) / (1920 - 320)));
+        color: rgba(var(--theme-color), 1);
+
+    }
+
+    h3 {
+        margin-top: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)));
+        color: rgba(var(--theme-color), 1);
+    }
+
+    p {
+        margin-top: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)));
+        color: rgba(var(--light-text), 1);
+        line-height: 1.5;
+    }
+}
