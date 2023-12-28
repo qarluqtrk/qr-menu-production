@@ -66,7 +66,7 @@ class PosterAPI:
         response = requests.get(url).json()
         return response['response']
 
-    def create_dine_in_order(self, products):
+    def create_dine_in_order(self, products, table_id):
         url = self.base_url + '/api/' + 'incomingOrders.createIncomingOrder' + '?token=' + self.api_key
         incoming_order = {
             "spot_id": 1,
@@ -74,7 +74,7 @@ class PosterAPI:
             "service_mode": "1",
             "products": products,
             "source_id": 1,
-            "comment": "table id: 1",
+            "comment": f"table id: {table_id}",
             # "skip_phone_validation": True,
         }
         response = requests.post(url, json=incoming_order).json()

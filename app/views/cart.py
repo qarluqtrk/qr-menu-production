@@ -106,6 +106,7 @@ def make_order(request):
                              "modification": [{"m": str(cart_items[f"{cart_item}"]["modification_id"]), "a": 1},],
                              "count": cart_items[cart_item]['quantity']})
     print(products)
-    poster.create_dine_in_order(products)
-    a = cart.clear()
+    poster.create_dine_in_order(products, table_id=request.session['table_id'])
+    # cart clear
+    request.session['cart'] = {}
     return JsonResponse({"status": "success"})
