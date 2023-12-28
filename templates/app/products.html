@@ -235,12 +235,12 @@
             <div class="shipping-details">
               <div class="shipping-info">
                 <h4>${item.name}</h4>
-                <h5>${item.price}</h5>
+                <h5>${String(item['price']).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm</h5>
               </div>
               <div class="price">
                 <div class="form-check form-check-reverse">
-                  <label class="form-check-label" for="radio${item.dish_modification_id}">$${item.price}</label>
-                  <input class="form-check-input" type="radio" name="exampleRadio" id="radio${item.dish_modification_id}" value="option${item.dish_modification_id}"/>
+                  <label class="form-check-label" for="radio${item.dish_modification_id}"></label>
+                  <input class="form-check-input" type="radio" name="modification_id" id="radio${item.dish_modification_id}" value="${item.dish_modification_id}"/>
                 </div>
               </div>
             </div>

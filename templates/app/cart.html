@@ -68,7 +68,14 @@
                                 <li id="cart-quantity-{{ cart_detail.product_id }}">Soni
                                     : {{ cart_detail.quantity }}</li>
                                 {% if cart_detail.modification_id is not 0 %}
-                                    <li><span class="product-color color1"></span>Blue</li>
+                                    {% if cart_detail.info.group_modifications %}
+                                    	{% for modification in cart_detail.info.group_modifications.0.modifications %}
+                                    		{% if cart_detail.modification_id == modification.dish_modification_id %}
+                                                <li>{{ modification.name }}</li>
+                                    		{% endif %}
+                                    	{% endfor %}
+
+                                    {% endif %} 
                                 {% endif %}
                             </ul>
 
@@ -76,11 +83,19 @@
                                 <div class="d-flex align-items-center gap-2">
                                     <h3 class="fw-semibold">
                                         {% if cart_detail.modification_id is not 0 %}
-                                            {% for modification in cart_detail.info.modifications %}
-                                            	{% if modification.modificator_id == cart_detail.modification_id %}
-                                            		<span class="price-number">{{ modification.sources.0.price|slice:":-2" }}</span>
-                                            	{% endif %}
-                                            {% endfor %}
+                                            {% if cart_detail.info.modifications %}
+                                                {% for modification in cart_detail.info.modifications %}
+                                                    {% if modification.modificator_id == cart_detail.modification_id %}
+                                                        <span class="price-number">{{ modification.sources.0.price|slice:":-2" }}</span>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% else %}
+                                                {% for modification in cart_detail.info.group_modifications.0.modifications %}
+                                                    {% if modification.dish_modification_id == cart_detail.modification_id %}
+                                                        <span class="price-number">{{ modification.price }}</span>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
 
                                         {% else %}
                                             <span class="price-number">{{ cart_detail.info.sources.0.price|slice:":-2" }}</span>
@@ -201,7 +216,7 @@
             $.ajax({
                 type: "GET",
                 url: "/delete-cart-item/" + this.getAttribute("data-product-id"),
-                success: function (data){
+                success: function (data) {
                     document.getElementById('cart-total').innerHTML = `${String(data['cart_total']).slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm`
                 }
             })

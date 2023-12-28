@@ -24,7 +24,7 @@ class Cart:
         self.cart[productID]['quantity'] += 1
 
         if modification_id:
-            self.cart[productID]['modification_id'] = modification_id
+            self.cart[productID]['modification_id'] = int(modification_id)
         self.save()
 
     def quantity_change(self, product_id, change_method):
@@ -60,8 +60,18 @@ class Cart:
                 total += int(product['sources'][0]['price']) * int(item['quantity'])
             else:
                 product = poster.get_product(product_id)
-                for modification in product["modifications"]:
-                    if modification['modificator_id'] == item["modification_id"]:
-                        total += int(modification['sources'][0]['price']) * int(item['quantity'])
-                        break
+                try:
+                    if product["modifications"]:
+                        for modification in product["modifications"]:
+                            if modification['modificator_id'] == item["modification_id"]:
+                                total += int(modification['sources'][0]['price']) * int(item['quantity'])
+                                break
+                except:
+                    if product["group_modifications"]:
+                        print(product)
+                        for modification in product["group_modifications"][0]["modifications"]:
+                            if modification['dish_modification_id'] == int(item["modification_id"]):
+                                price = str(modification['price']) + "00"
+                                total += int(price) * int(item['quantity'])
+                                break
         return total
