@@ -16,15 +16,15 @@ class Cart:
     #     self.cart[product_id]['quantity'] += quantity
     #     self.save()
 
-    def add(self, product_id, quantity=1, modification_id=None):
-        product_id = str(product_id)
-        if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0, 'modification_id': 0}
+    def add(self, product_id, modification_id=None, quantity=1):
+        productID = str(product_id)
+        if productID not in self.cart:
+            self.cart[productID] = {'quantity': 0, 'modification_id': 0}
 
-        self.cart[product_id]['quantity'] += quantity
+        self.cart[productID]['quantity'] += 1
 
         if modification_id:
-            self.cart[product_id]['modification_id'] = modification_id
+            self.cart[productID]['modification_id'] = modification_id
         self.save()
 
     def quantity_change(self, product_id, change_method):
@@ -55,6 +55,13 @@ class Cart:
     def get_total_price(self):
         total = 0
         for product_id, item in self.cart.items():
-            product = poster.get_product(product_id)
-            total += int(product['sources'][0]['price']) * int(item['quantity'])
+            if item["modification_id"] == 0:
+                product = poster.get_product(product_id)
+                total += int(product['sources'][0]['price']) * int(item['quantity'])
+            else:
+                product = poster.get_product(product_id)
+                for modification in product["modifications"]:
+                    if modification['modificator_id'] == item["modification_id"]:
+                        total += int(modification['sources'][0]['price']) * int(item['quantity'])
+                        break
         return total
