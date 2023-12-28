@@ -79,36 +79,39 @@
                         </div>
                     </div>
                 {% elif product.group_modifications %}
-                    <div class="col-6">
-                        <div class="product-box">
-                            <div class="product-box-img">
-                                <a href="/product/{{ product.product_id }}"> <img class="img"
-                                                                                  src="https://joinposter.com{{ product.photo }}"
-                                                                                  alt="p1"/></a>
+                    {% if product.sources.0.visible == 1 %}
+                        <div class="col-6">
+                            <div class="product-box">
+                                <div class="product-box-img">
+                                    <a href="/product/{{ product.product_id }}"> <img class="img"
+                                                                                      src="https://joinposter.com{{ product.photo }}"
+                                                                                      alt="p1"/></a>
 
-                                <div class="cart-box">
-                                    <button type="button" class="cart-bag" data-bs-toggle="modal"
-                                            data-bs-target="#modificationModal"
-                                            data-product-id="{{ product.product_id }}"><i class="iconsax bag"
-                                                                                          data-icon="basket-2"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="product-box-detail">
-                                <h4>{{ product.product_name }}</h4>
-                                <div class="bottom-panel">
-                                    <div class="price">
-                                        <h4>{{ product.group_modifications.0.modifications.0.price|slice:":-2" }} <span
-                                                class="pev-price">so'mdan</span></h4>
+                                    <div class="cart-box">
+                                        <button type="button" class="cart-bag" data-bs-toggle="modal"
+                                                data-bs-target="#modificationModal"
+                                                data-product-id="{{ product.product_id }}"><i class="iconsax bag"
+                                                                                              data-icon="basket-2"></i>
+                                        </button>
                                     </div>
-                                    <div class="rating">
-                                        <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
-                                        <h6>4.5</h6>
+                                </div>
+                                <div class="product-box-detail">
+                                    <h4>{{ product.product_name }}</h4>
+                                    <div class="bottom-panel">
+                                        <div class="price">
+                                            <h4>{{ product.group_modifications.0.modifications.0.price|slice:":-2" }}
+                                                <span
+                                                        class="pev-price">so'mdan</span></h4>
+                                        </div>
+                                        <div class="rating">
+                                            <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
+                                            <h6>4.5</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
                 {% else %}
                     {% if product.sources.0.visible == 1 %}
                         <div class="col-6">
@@ -269,7 +272,7 @@
 
                         }
                     }
-                    dynamicContent+=`<input type="hidden" value="${productId}" name="product_id" />`
+                    dynamicContent += `<input type="hidden" value="${productId}" name="product_id" />`
                     // Update the content within the modal
                     dynamicContentContainer.innerHTML = dynamicContent;
 

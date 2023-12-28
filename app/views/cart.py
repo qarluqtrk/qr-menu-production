@@ -46,6 +46,7 @@ def cart_view(request):
                 cart.remove(cart_item)
 
     cart_total = cart.get_total_price()
+    print(cart_details)
 
     return render(request, 'app/cart.html', {'cart_details': cart_details, 'cart_total': str(cart_total)})
 
