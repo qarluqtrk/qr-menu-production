@@ -28,10 +28,14 @@ def cart_view(request):
     return render(request, 'app/cart.html', {'cart_details': cart_details, 'cart_total': str(cart_total)})
 
 
-def add_to_cart(request, product_id):
+def add_to_cart(request, product_id, modification_id=None):
     cart = Cart(request)
-    cart.add(product_id)
-    return redirect('cart')
+    if modification_id is None:
+        cart.add(product_id)
+        return redirect('cart')
+    else:
+        cart.add(product_id, modification_id)
+        return redirect('cart')
 
 
 # Ajax Tools for Cart
