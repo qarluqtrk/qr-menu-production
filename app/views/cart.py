@@ -17,14 +17,14 @@ def cart_view(request):
         try:
             for modification in product["modifications"]:
 
-                if modification['modificator_id'] == cart_items[cart_item]['modification_id']:
+                if int(modification['modificator_id']) == int(cart_items[cart_item]['modification_id']):
 
                     if modification['sources'][0]['visible'] == 1:
                         cart_details.append(
                             {
                                 "product_id": cart_item,
                                 "quantity": cart_items[cart_item]['quantity'],
-                                "modification_id": cart_items[cart_item]['modification_id'],
+                                "modification_id": str(cart_items[cart_item]['modification_id']),
                                 "info": product,
                             }
                         )
@@ -46,7 +46,6 @@ def cart_view(request):
                 cart.remove(cart_item)
 
     cart_total = cart.get_total_price()
-    print(cart_details)
 
     return render(request, 'app/cart.html', {'cart_details': cart_details, 'cart_total': str(cart_total)})
 

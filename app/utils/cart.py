@@ -63,12 +63,11 @@ class Cart:
                 try:
                     if product["modifications"]:
                         for modification in product["modifications"]:
-                            if modification['modificator_id'] == item["modification_id"]:
+                            if int(modification['modificator_id']) == int(item["modification_id"]):
                                 total += int(modification['sources'][0]['price']) * int(item['quantity'])
                                 break
                 except:
                     if product["group_modifications"]:
-                        print(product)
                         for modification in product["group_modifications"][0]["modifications"]:
                             if modification['dish_modification_id'] == int(item["modification_id"]):
                                 price = str(modification['price']) + "00"
