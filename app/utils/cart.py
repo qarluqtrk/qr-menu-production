@@ -56,5 +56,5 @@ class Cart:
         total = 0
         for product_id, item in self.cart.items():
             product = poster.get_product(product_id)
-            total += int(product['spots'][0]['price']) * int(item['quantity'])
+            total += int(product['sources'][0]['price']) * int(item['quantity'])
         return total

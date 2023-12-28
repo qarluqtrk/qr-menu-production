@@ -29,6 +29,7 @@
 </head>
 
 <body>
+{% csrf_token %}
 <!-- header start -->
 <header class="section-t-space">
     <div class="custom-container">
@@ -47,49 +48,53 @@
     <div class="custom-container">
         <ul class="horizontal-product-list">
             {% for cart_detail in cart_details %}
-            	<li class="cart-product-box">
-                <div class="horizontal-product-box">
-                    <div class="horizontal-product-img">
-                        <a href="/product/{{ cart_detail.product_id }}">
-                            <img class="img-fluid img" src="https://joinposter.com{{ cart_detail.info.photo }}" alt="p11"/>
-                        </a>
-                    </div>
-                    <div class="horizontal-product-details">
-                        <div class="d-flex align-items-center justify-content-between">
+                <li class="cart-product-box">
+                    <div class="horizontal-product-box">
+                        <div class="horizontal-product-img">
                             <a href="/product/{{ cart_detail.product_id }}">
-                                <h4>{{ cart_detail.info.product_name }}</h4>
+                                <img class="img-fluid img" src="https://joinposter.com{{ cart_detail.info.photo }}"
+                                     alt="p11"/>
                             </a>
-                            <i class="iconsax trash" data-icon="trash"></i>
                         </div>
-                        <ul class="product-info">
-                            <li>Soni : {{ cart_detail.quantity }}</li>
-                            {% if cart_detail.modification_id is not 0 %}
-                            	<li><span class="product-color color1"></span>Blue</li>
-                            {% endif %}
-                        </ul>
-
-                        <div class="d-flex align-items-center justify-content-between mt-3">
-                            <div class="d-flex align-items-center gap-2">
-                                <h3 class="fw-semibold">
-                                    {% if cart_details.modification_id is not 0 %}
-                                    	{{ cart_detail.info.spots.0.price|slice:":-2" }}
-                                    {% endif %}
-                                    <span class="light-text fw-normal">so'm</span>
-                                </h3>
+                        <div class="horizontal-product-details">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <a href="/product/{{ cart_detail.product_id }}">
+                                    <h4>{{ cart_detail.info.product_name }}</h4>
+                                </a>
+                                <i class="iconsax trash" data-icon="trash"
+                                   data-product-id="{{ cart_detail.product_id }}"></i>
                             </div>
-                            <div class="plus-minus">
-                                <button class="sub plus-minus-button">
-                                    <i class="iconsax" data-icon="minus"></i>
-                                </button>
-                                <input type="number" value="{{ cart_detail.quantity }}" min="1" max="10"/>
-                                <button class="add plus-minus-button">
-                                    <i class="iconsax" data-icon="add"></i>
-                                </button>
+                            <ul class="product-info">
+                                <li id="cart-quantity-{{ cart_detail.product_id }}">Soni
+                                    : {{ cart_detail.quantity }}</li>
+                                {% if cart_detail.modification_id is not 0 %}
+                                    <li><span class="product-color color1"></span>Blue</li>
+                                {% endif %}
+                            </ul>
+
+                            <div class="d-flex align-items-center justify-content-between mt-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <h3 class="fw-semibold">
+                                        {% if cart_details.modification_id is not 0 %}
+                                            <span class="price-number">{{ cart_detail.info.sources.0.price|slice:":-2" }}</span>
+                                        {% endif %}
+                                        <span class="light-text fw-normal">so'm</span>
+                                    </h3>
+                                </div>
+                                <div class="plus-minus">
+                                    <button class="sub plus-minus-button">
+                                        <i class="iconsax" data-icon="minus"></i>
+                                    </button>
+                                    <input type="number" value="{{ cart_detail.quantity }}" min="1" max="10"
+                                           data-product-id="{{ cart_detail.product_id }}"/>
+                                    <button class="add plus-minus-button">
+                                        <i class="iconsax" data-icon="add"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </li>
+                </li>
             {% endfor %}
 
         </ul>
@@ -101,7 +106,7 @@
 <div class="pay-popup">
     <div class="price-items">
         <h6>Umumiy narx</h6>
-        <h2>{{ cart_total|slice:":-2" }} so'm</h2>
+        <h2 id="cart-total"><span class="price-number">{{ cart_total|slice:":-2" }}</span> so'm</h2>
     </div>
     <a href="checkout.html" class="btn btn-lg theme-btn pay-btn mt-0">Checkout</a>
 </div>
@@ -111,6 +116,9 @@
 <section class="panel-space"></section>
 <!-- panel-space end -->
 
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <!-- iconsax js -->
 <script src={% static "assets/js/iconsax.js" %}></script>
 
@@ -119,5 +127,76 @@
 
 <!-- script js -->
 <script src={% static "assets/js/script.js" %}></script>
+
+<script>
+    /*====================
+ Plus Minus Quantity Item js
+=======================*/
+    const plusMinus = document.querySelectorAll(".plus-minus ");
+
+    for (var i = 0; i < plusMinus.length; ++i) {
+        const addButton = plusMinus[i].querySelector(".add");
+        const subButton = plusMinus[i].querySelector(".sub");
+        addButton?.addEventListener("click", function () {
+            const inputEl = this.parentNode.querySelector("input[type='number']");
+            if (inputEl.value < 10) {
+                inputEl.value = Number(inputEl.value) + 1;
+                $.ajax({
+                    type: "POST",
+                    url: "/change-quantity/",
+                    headers: {
+                        "X-CSRFToken": getCookie("csrftoken"),
+                    },
+                    data: {
+                        product_id: inputEl.getAttribute('data-product-id'),
+                        change_method: "plus",
+                    },
+                    success: function (data) {
+                        inputEl.value = data['quantity'];
+                        document.getElementById(`cart-quantity-${inputEl.getAttribute('data-product-id')}`).innerHTML = `Soni : ${data['quantity']}`;
+                        document.getElementById('cart-total').innerHTML = `${String(data['cart_total']).slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm`
+                    }
+                })
+            }
+        });
+        subButton?.addEventListener("click", function () {
+            const inputEl = this.parentNode.querySelector("input[type='number']");
+            if (inputEl.value > 1) {
+                inputEl.value = Number(inputEl.value) - 1;
+                $.ajax({
+                    type: "POST",
+                    url: "/change-quantity/",
+                    headers: {
+                        "X-CSRFToken": getCookie("csrftoken"),
+                    },
+                    data: {
+                        product_id: inputEl.getAttribute('data-product-id'),
+                        change_method: "minus",
+                    },
+                    success: function (data) {
+                        inputEl.value = data['quantity'];
+                        document.getElementById(`cart-quantity-${inputEl.getAttribute('data-product-id')}`).innerHTML = `Soni : ${data['quantity']}`;
+                        document.getElementById('cart-total').innerHTML = `${String(data['cart_total']).slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm`
+                    }
+                })
+            }
+        });
+    }
+
+    /*======================
+     delate Quantity Item js
+    =======================*/
+    const cartBox = document.querySelectorAll(".cart-product-box");
+    cartBox?.forEach((el) => {
+        const deleteButton = el.querySelector(".trash");
+        deleteButton.addEventListener("click", function () {
+            this.closest(".cart-product-box").style.display = "none";
+            $.ajax({
+                type: "GET",
+                url: "/delete-cart-item/" + this.getAttribute("data-product-id"),
+            })
+        });
+    });
+</script>
 </body>
 </html>
