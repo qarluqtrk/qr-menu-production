@@ -122,7 +122,7 @@ def make_order(request):
 
     products = []
     for cart_item in cart_items:
-        if cart_items[f"{cart_item}"]['modification_id'] is 0:
+        if cart_items[f"{cart_item}"]['modification_id'] == 0:
             products.append({"product_id": cart_item, "count": cart_items[cart_item]['quantity']})
         else:
             products.append({"product_id": cart_item,
