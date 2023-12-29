@@ -2,34 +2,35 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link rel="icon" href="{% static 'assets/images/afc-logo.png' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'assets/images/afc-logo.png' %}" type="image/x-icon"/>
     <title>AFC</title>
-    <link rel="apple-touch-icon" href="{% static 'assets/images/afc-logo.png' %}" />
-    <meta name="theme-color" content="#122636" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="fuzzy" />
-    <meta name="msapplication-TileImage" content="{% static 'assets/images/afc-logo.png' %}" />
-    <meta name="msapplication-TileColor" content="#FFFFFF" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="apple-touch-icon" href="{% static 'assets/images/afc-logo.png' %}"/>
+    <meta name="theme-color" content="#122636"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-title" content="fuzzy"/>
+    <meta name="msapplication-TileImage" content="{% static 'assets/images/afc-logo.png' %}"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <!--Google font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"/>
 
     <!-- iconsax css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/iconsax.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/iconsax.css' %}"/>
     <!-- bootstrap css -->
-    <link rel="stylesheet" id="rtl-link" type="text/css" href="{% static 'assets/css/vendors/bootstrap.min.css' %}" />
+    <link rel="stylesheet" id="rtl-link" type="text/css" href="{% static 'assets/css/vendors/bootstrap.min.css' %}"/>
     <!-- Theme css -->
-    <link rel="stylesheet" id="change-link" type="text/css" href="{% static 'assets/css/style.css' %}" />
-  </head>
+    <link rel="stylesheet" id="change-link" type="text/css" href="{% static 'assets/css/style.css' %}"/>
+</head>
 
 <body>
 {% csrf_token %}
@@ -176,26 +177,86 @@
 
 <!-- script js -->
 <script src={% static "assets/js/script.js" %}></script>
+{#<script>#}
+{#    // Function to show the success modal#}
+{#    function showSuccessModal() {#}
+{#        $('#success').modal('show');  // Assuming you are using Bootstrap modal#}
+{#    }#}
+{##}
+{##}
+{#    function showErrorAlert(message) {#}
+{#        alert(message);#}
+{#    }#}
+{##}
+{#    // Event handler for the "Jo'natish" link click#}
+{#    $(document).ready(function () {#}
+{#        $('a[href="#success"]').click(function (e) {#}
+{#            $.ajax({#}
+{#                type: "GET",#}
+{#                url: "/make-order/",#}
+{#                success: function (data) {#}
+{#                    e.preventDefault();  // Prevent the default behavior of the link#}
+{##}
+{#                    if (data.status === "success") {#}
+{#                        showSuccessModal();   // Call the function to show the success modal#}
+{#                    } else if (data.status === "error") {#}
+{#                        showErrorAlert(data.message);  // Call the function to show the error alert#}
+{#                    }#}
+{#                }#}
+{#            });#}
+{#        });#}
+{#    });#}
+{#</script>#}
+
+
 <script>
     // Function to show the success modal
     function showSuccessModal() {
         $('#success').modal('show');  // Assuming you are using Bootstrap modal
     }
 
+    function showErrorAlert(message) {
+        alert(message);
+    }
+
     // Event handler for the "Jo'natish" link click
     $(document).ready(function () {
         $('a[href="#success"]').click(function (e) {
+            // Check if table_id exists in the session
+            if (!checkTableIdInSession()) {
+                showErrorAlert("Siz faqat qr-menu orqali buyurtma berishingiz mumkin !" +
+                    "Iltimos qr-menu orqali qayta buyurtma bering !");
+
+
+                return;
+            }
+
             $.ajax({
                 type: "GET",
                 url: "/make-order/",
                 success: function (data) {
                     e.preventDefault();  // Prevent the default behavior of the link
-                    showSuccessModal();   // Call the function to show the success modal
+
+                    if (data.status === "success") {
+                        showSuccessModal();   // Call the function to show the success modal
+                    } else if (data.status === "error") {
+                        showErrorAlert(data.message);  // Call the function to show the error alert
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle AJAX errors here
+                    console.error(xhr.responseText);
                 }
-            })
+            });
         });
     });
+
+    // Function to check if 'table_id' exists in the session
+    function checkTableIdInSession() {
+        return Boolean('{{ request.session.table_id }}');
+    }
 </script>
+
 
 <script>
     /*====================

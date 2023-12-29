@@ -78,7 +78,7 @@ class PosterAPI:
             # "skip_phone_validation": True,
         }
         response = requests.post(url, json=incoming_order).json()
-        print(response)
+        print(f"RESPONSE :  {response}")
         return response['response']
 
 

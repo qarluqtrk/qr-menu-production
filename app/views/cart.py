@@ -128,11 +128,16 @@ def make_order(request):
             products.append({"product_id": cart_item,
                              "modification": [{"m": str(cart_items[f"{cart_item}"]["modification_id"]), "a": 1}, ],
                              "count": cart_items[cart_item]['quantity']})
+    table_id = request.session.get('table_id')
+    if not table_id:
+        return JsonResponse({"status": "error", "message": "'table_id' not found in session"})
 
-    poster.create_dine_in_order(products, table_id=request.session['table_id'])
-    # cart clear
-    request.session['cart'] = {}
-    return JsonResponse({"status": "success"})
+    else:
+
+        poster.create_dine_in_order(products, table_id=request.session['table_id'])
+        # cart clear
+        request.session['cart'] = {}
+        return JsonResponse({"status": "success"})
 
 
 def empty_cart_view(request):
