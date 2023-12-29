@@ -256,11 +256,12 @@
     cartBox?.forEach((el) => {
         const deleteButton = el.querySelector(".trash");
         deleteButton.addEventListener("click", function () {
-            this.closest(".cart-product-box").style.display = "none";
+            var cart_product_box = this.closest(".cart-product-box")
             $.ajax({
                 type: "GET",
                 url: "/delete-cart-item/" + this.getAttribute("data-product-id"),
                 success: function (data) {
+                    cart_product_box.style.display = "none";
                     document.getElementById('cart-total').innerHTML = `${String(data['cart_total']).slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm`
                 }
             })
