@@ -1,10 +1,9 @@
 import time
 
-from django.http import JsonResponse
-from django.shortcuts import render, redirect
-
 from app.utils.cart import Cart
 from app.utils.poster import poster
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
 
 
 # Actual Cart Page
@@ -19,14 +18,39 @@ def cart_view(request):
         poster_products_dict[i["product_id"]] = i
 
     cart_details = []
-    try:
-        for cart_item in cart_items.copy():
-            product = poster_products_dict[cart_item]
+    if request.session['cart']:
+        try:
+            for cart_item in cart_items.copy():
+                product = poster_products_dict[cart_item]
 
-            if "modifications" in product:
-                for modification in product["modifications"]:
-                    if int(modification["modificator_id"]) == int(cart_items[cart_item]["modification_id"]):
-                        if modification["sources"][0]["visible"] == 1:
+                if "modifications" in product:
+                    for modification in product["modifications"]:
+                        if int(modification["modificator_id"]) == int(cart_items[cart_item]["modification_id"]):
+                            if modification["sources"][0]["visible"] == 1:
+                                cart_details.append(
+                                    {
+                                        "product_id": cart_item,
+                                        "quantity": cart_items[cart_item]["quantity"],
+                                        "modification_id": str(cart_items[cart_item]["modification_id"]),
+                                        "info": product,
+                                    }
+                                )
+                                break
+                            else:
+                                cart.remove(cart_item)
+                                break
+                else:
+                    if product["sources"][0]["visible"] == 1:
+                        if "group_modifications" in product:
+                            cart_details.append(
+                                {
+                                    "product_id": cart_item,
+                                    "quantity": cart_items[cart_item]["quantity"],
+                                    "modification_id": int(cart_items[cart_item]["modification_id"]),
+                                    "info": product,
+                                }
+                            )
+                        else:
                             cart_details.append(
                                 {
                                     "product_id": cart_item,
@@ -35,40 +59,18 @@ def cart_view(request):
                                     "info": product,
                                 }
                             )
-                            break
-                        else:
-                            cart.remove(cart_item)
-                            break
-            else:
-                if product["sources"][0]["visible"] == 1:
-                    if "group_modifications" in product:
-                        cart_details.append(
-                            {
-                                "product_id": cart_item,
-                                "quantity": cart_items[cart_item]["quantity"],
-                                "modification_id": int(cart_items[cart_item]["modification_id"]),
-                                "info": product,
-                            }
-                        )
                     else:
-                        cart_details.append(
-                            {
-                                "product_id": cart_item,
-                                "quantity": cart_items[cart_item]["quantity"],
-                                "modification_id": str(cart_items[cart_item]["modification_id"]),
-                                "info": product,
-                            }
-                        )
-                else:
-                    cart.remove(cart_item)
+                        cart.remove(cart_item)
 
-    except:
-        request.session['cart'] = {}
-        return redirect('cart')
+        except:
+            request.session['cart'] = {}
+            return redirect('cart')
 
-    cart_total = cart.get_total_price()
+        cart_total = cart.get_total_price()
 
-    return render(request, 'app/cart.html', {'cart_details': cart_details, 'cart_total': str(cart_total)})
+        return render(request, 'app/cart.html', {'cart_details': cart_details, 'cart_total': str(cart_total)})
+    else:
+        return redirect('empty-cart')
 
 
 def add_to_cart(request, product_id, modification_id=None):
@@ -131,3 +133,7 @@ def make_order(request):
     # cart clear
     request.session['cart'] = {}
     return JsonResponse({"status": "success"})
+
+
+def empty_cart_view(request):
+    return render(request, 'app/empty-cart.html')
