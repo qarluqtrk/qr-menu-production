@@ -98,11 +98,19 @@
                                 <div class="product-box-detail">
                                     <h4>{{ product.product_name }}</h4>
                                     <div class="bottom-panel">
-                                        <div class="price">
+                                        {% if product.category_name != "COMBO SET" %}
+                                            <div class="price">
                                             <h4>{{ product.group_modifications.0.modifications.0.price|slice:":-2" }}
                                                 <span
                                                         class="pev-price">so'mdan</span></h4>
                                         </div>
+                                        {% else %}
+                                            <div class="price">
+                                            <h4>{{ product.price.1|slice:":-2" }}
+                                                <span
+                                                        class="pev-price">so'm</span></h4>
+                                        </div>
+                                        {% endif %}
                                         <div class="rating">
                                             <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
                                             <h6>4.5</h6>

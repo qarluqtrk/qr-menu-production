@@ -82,7 +82,7 @@
                             <div class="d-flex align-items-center justify-content-between mt-3">
                                 <div class="d-flex align-items-center gap-2">
                                     <h3 class="fw-semibold">
-                                        {% if cart_detail.modification_id is not 0 %}
+                                        {% if cart_detail.modification_id != '0' %}
                                             {% if cart_detail.info.modifications %}
                                                 {% for modification in cart_detail.info.modifications %}
                                                     {% if modification.modificator_id == cart_detail.modification_id %}

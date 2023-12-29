@@ -55,11 +55,11 @@ class Cart:
     def get_total_price(self):
         total = 0
         product_cache = {}  # Cache to store product information
+        poster_products = poster.get_products()
+        for i in poster_products:
+            product_cache[i["product_id"]] = i
 
         for product_id, item in self.cart.items():
-            if product_id not in product_cache:
-                product = poster.get_product(product_id)
-                product_cache[product_id] = product
 
             product = product_cache[product_id]
 
@@ -84,4 +84,3 @@ class Cart:
                                     break
 
         return total
-

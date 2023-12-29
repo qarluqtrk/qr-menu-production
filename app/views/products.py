@@ -5,6 +5,5 @@ from app.utils.poster import poster
 
 def products_view(request, category_id):
     products = poster.get_products(category_id)
-    print(products)
     return render(request, 'app/products.html',
                   {'products': products})
