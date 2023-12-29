@@ -110,3 +110,4 @@ dmypy.json
 .pytype/
 cython_debug/
 .idea/
+db.sqlite3/
