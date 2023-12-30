@@ -25,3 +25,5 @@ urlpatterns = [
     path('make-order/', make_order, name='make-order'),
     path('table_manager/<int:table_id>/', table_manager, name='table_manager'),
 ]
+
+

@@ -331,6 +331,7 @@
                 type: "GET",
                 url: "/delete-cart-item/" + this.getAttribute("data-product-id"),
                 success: function (data) {
+                    console.log(data)
                     cart_product_box.style.display = "none";
                     document.getElementById('cart-total').innerHTML = `${String(data['cart_total']).slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm`
                 }

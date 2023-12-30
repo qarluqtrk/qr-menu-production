@@ -1,4 +1,5 @@
 import time
+from pprint import _safe_key
 
 from app.utils.cart import Cart
 from app.utils.poster import poster
@@ -112,7 +113,8 @@ def change_quantity(request):
 def delete_cart_item(request, product_id):
     cart = Cart(request)
     cart.remove(product_id)
-    return JsonResponse({"status": "success", "cart_total": str(cart.get_total_price())})
+    data = {"status": "success", "cart_total": str(cart.get_total_price())}
+    return JsonResponse(data, safe=False)
 
 
 def make_order(request):

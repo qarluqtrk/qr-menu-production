@@ -110,10 +110,7 @@
                                                             class="pev-price">so'm</span></h4>
                                             </div>
 
-                                            <div class="rating">
-                                                <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
-                                                <h6>4.5</h6>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -143,10 +140,7 @@
                                                             class="pev-price">so'mdan</span></h4>
                                             </div>
 
-                                            <div class="rating">
-                                                <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
-                                                <h6>4.5</h6>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -178,10 +172,7 @@
                                                 <span
                                                         class="pev-price">so'm</span></h4>
                                         </div>
-                                        <div class="rating">
-                                            <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
-                                            <h6>4.5</h6>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -211,10 +202,7 @@
                                                 <span class="pev-price">so'm</span>
                                             </h4>
                                         </div>
-                                        <div class="rating">
-                                            <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
-                                            <h6>4.5</h6>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -238,7 +226,7 @@
                 <div class="custom-container">
                     <div class="header-panel">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <h3>Tanlang</h3>
+                        <h3>Modifikatsiyalar</h3>
                     </div>
                 </div>
             </header>
@@ -289,6 +277,7 @@
             var button = event.relatedTarget;
             var productId = button.getAttribute('data-product-id');
             var dynamicContentContainer = document.getElementById('modificationOptionsContainer');
+            dynamicContentContainer.innerHTML = " "
 
             $.ajax({
                 type: "GET",
@@ -304,6 +293,7 @@
                             if (data['product']['group_modifications'][0]['num_max'] === data['product']['group_modifications'][0]['num_min']) {
                                 for (item of data['product']['group_modifications'][0]['modifications']) {
                                     console.log(item)
+                                    document.getElementById('applyModifications').disabled = false
                                     dynamicContent += `
         <div class="col-12">
           <div class="shipping-box">
@@ -342,6 +332,7 @@
                         } else {
                             for (item of data['product']['group_modifications']) {
                                 console.log(item)
+                                document.getElementById('applyModifications').disabled = false
                                 dynamicContent += `
         <div class="col-12">
           <div class="shipping-box">
@@ -386,6 +377,9 @@
 
                     // Show the modal
                     myModal.show();
+                },
+                error: function (){
+                    document.getElementById('applyModifications').disabled = true
                 }
             })
         });
