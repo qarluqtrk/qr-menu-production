@@ -1,10 +1,10 @@
 import time
-from pprint import _safe_key
+
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
 
 from app.utils.cart import Cart
 from app.utils.poster import poster
-from django.http import JsonResponse
-from django.shortcuts import render, redirect
 
 
 # Actual Cart Page
@@ -27,7 +27,7 @@ def cart_view(request):
                 if "modifications" in product:
                     for modification in product["modifications"]:
                         if int(modification["modificator_id"]) == int(cart_items[cart_item]["modification_id"]):
-                            if modification["sources"][0]["visible"] == 1:
+                            if modification["sources"][0]["visible"] == True:
                                 cart_details.append(
                                     {
                                         "product_id": cart_item,
@@ -41,7 +41,7 @@ def cart_view(request):
                                 cart.remove(cart_item)
                                 break
                 else:
-                    if product["sources"][0]["visible"] == 1:
+                    if product["sources"][0]["visible"] == True:
                         if "group_modifications" in product:
                             cart_details.append(
                                 {
