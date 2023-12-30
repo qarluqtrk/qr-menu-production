@@ -94,14 +94,20 @@
                                                     {% endif %}
                                                 {% endfor %}
                                             {% else %}
-                                                {% if cart_detail.info.category_name == "COMBO" %}
+                                                {% if cart_detail.info.group_modifications|length > 1 %}
                                                     <span class="price-number">{{ cart_detail.info.price.1|slice:":-2" }}</span>
                                                 {% else %}
-                                                    {% for modification in cart_detail.info.group_modifications.0.modifications %}
-                                                        {% if modification.dish_modification_id == cart_detail.modification_id %}
-                                                            <span class="price-number">{{ modification.price }}</span>
-                                                        {% endif %}
-                                                    {% endfor %}
+                                                    {% if cart_detail.info.group_modifications.0.num_max == cart_detail.info.group_modifications.0.num_min %}
+                                                        <span class="price-number">{{ cart_detail.info.price.1|slice:":-2" }}</span>
+                                                    {% else %}
+                                                        {% for modification in cart_detail.info.group_modifications.0.modifications %}
+                                                            {% if modification.dish_modification_id == cart_detail.modification_id %}
+                                                                <span class="price-number">{{ modification.price }}</span>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endif %}
+
+
                                                 {% endif %}
 
                                             {% endif %}

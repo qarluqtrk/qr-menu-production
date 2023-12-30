@@ -253,7 +253,7 @@
 
                         </div>
                         <button type="submit" id="applyModifications" class="btn theme-btn w-100 shipping"
-                                style="margin-bottom: 10px">Savatchaga qo'shish
+                                style="margin-bottom: 10px" disabled>Savatchaga qo'shish
                         </button>
                     </div>
                 </form>
@@ -294,6 +294,7 @@
                 type: "GET",
                 url: "/product-json/" + productId,
                 success: function (data) {
+                    document.getElementById('applyModifications').disabled = true
                     console.log(data)
                     var dynamicContent = '';
 
@@ -316,6 +317,7 @@
         </div>`;
                                 }
                             } else {
+                                var count = 0;
                                 for (item of data['product']['group_modifications'][0]['modifications']) {
                                     console.log(item)
                                     dynamicContent += `
@@ -389,6 +391,32 @@
         });
     });
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Event listener for change events on the parent container
+        document.getElementById("modificationOptionsContainer").addEventListener("change", function (event) {
+            // Check if the changed element is a radio input
+            if (event.target.type === "radio" && event.target.name === "modification_id") {
+                // Enable or disable the submit button based on radio input selection
+                var submitButton = document.getElementById('applyModifications');
+                submitButton.disabled = !isChecked();
+            }
+        });
+    });
+
+    // Function to check if any radio input is selected
+    function isChecked() {
+        var radioInputs = document.querySelectorAll('input[name="modification_id"]');
+        for (var i = 0; i < radioInputs.length; i++) {
+            if (radioInputs[i].checked) {
+                return true;
+            }
+        }
+        return false;
+    }
+</script>
+
 
 </body>
 </html>

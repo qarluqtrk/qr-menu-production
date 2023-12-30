@@ -75,7 +75,6 @@ def cart_view(request):
 
 def add_to_cart(request, product_id, modification_id=None):
     cart = Cart(request)
-    cart = Cart(request)
     if modification_id is None:
         cart.add(product_id)
         return redirect('cart')
