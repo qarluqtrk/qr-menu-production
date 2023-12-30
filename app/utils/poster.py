@@ -70,19 +70,18 @@ class PosterAPI:
         url = self.base_url + '/api/' + 'incomingOrders.createIncomingOrder' + '?token=' + self.api_key
         incoming_order = {
             "spot_id": 1,
-            "phone": "+998918112777",
             "service_mode": "1",
             "products": products,
-            "source_id": 1,
+            "source_id": 3,
             "comment": f"table id: {table_id}",
-            # "skip_phone_validation": True,
+            "skip_phone_validation": True,
         }
         response = requests.post(url, json=incoming_order).json()
         print(f"RESPONSE :  {response}")
         return response['response']
 
 
-# poster = PosterAPI('914586:59197929114cb322596a0588f408b3dc')
+poster = PosterAPI('914586:59197929114cb322596a0588f408b3dc')
 # poster = PosterAPI('152255:3693466775bf67a3749ad3e3d61da514')
-poster = PosterAPI('152255:3693466775bf67a3749ad3e3d61da514')
-print(poster.get_categories())
+# poster = PosterAPI('152255:3693466775bf67a3749ad3e3d61da514')
+print(poster.get_category(31))

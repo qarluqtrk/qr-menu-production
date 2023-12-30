@@ -3,34 +3,35 @@
 <html lang="en">
 
 
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link rel="icon" href="{% static 'assets/images/afc-logo.png' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'assets/images/afc-logo.png' %}" type="image/x-icon"/>
     <title>AFC</title>
-    <link rel="apple-touch-icon" href="{% static 'assets/images/afc-logo.png' %}" />
-    <meta name="theme-color" content="#122636" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="fuzzy" />
-    <meta name="msapplication-TileImage" content="{% static 'assets/images/afc-logo.png' %}" />
-    <meta name="msapplication-TileColor" content="#FFFFFF" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="apple-touch-icon" href="{% static 'assets/images/afc-logo.png' %}"/>
+    <meta name="theme-color" content="#122636"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-title" content="fuzzy"/>
+    <meta name="msapplication-TileImage" content="{% static 'assets/images/afc-logo.png' %}"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <!--Google font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"/>
 
     <!-- iconsax css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/iconsax.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/iconsax.css' %}"/>
     <!-- bootstrap css -->
-    <link rel="stylesheet" id="rtl-link" type="text/css" href="{% static 'assets/css/vendors/bootstrap.min.css' %}" />
+    <link rel="stylesheet" id="rtl-link" type="text/css" href="{% static 'assets/css/vendors/bootstrap.min.css' %}"/>
     <!-- Theme css -->
-    <link rel="stylesheet" id="change-link" type="text/css" href="{% static 'assets/css/style.css' %}" />
-  </head>
+    <link rel="stylesheet" id="change-link" type="text/css" href="{% static 'assets/css/style.css' %}"/>
+</head>
 
 <body>
 <!-- header start -->
@@ -84,38 +85,73 @@
                     </div>
                 {% elif product.group_modifications %}
                     {% if product.sources.0.visible == 1 and product.group_modifications|length == 1 %}
-                        <div class="col-6">
-                            <div class="product-box">
-                                <div class="product-box-img">
-                                    <a href="/product/{{ product.product_id }}"> <img class="img"
-                                                                                      src="https://joinposter.com{{ product.photo }}"
-                                                                                      alt="p1"/></a>
+                        {% if product.group_modifications.0.num_max == product.group_modifications.0.num_min %}
+                            <div class="col-6">
+                                <div class="product-box">
+                                    <div class="product-box-img">
+                                        <a href="/product/{{ product.product_id }}"> <img class="img"
+                                                                                          src="https://joinposter.com{{ product.photo }}"
+                                                                                          alt="p1"/></a>
 
-                                    <div class="cart-box">
-                                        <button type="button" class="cart-bag" data-bs-toggle="modal"
-                                                data-bs-target="#modificationModal"
-                                                data-product-id="{{ product.product_id }}"><i class="iconsax bag"
-                                                                                              data-icon="basket-2"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-box-detail">
-                                    <h4>{{ product.product_name }}</h4>
-                                    <div class="bottom-panel">
-                                            <div class="price">
-                                            <h4>{{ product.group_modifications.0.modifications.0.price|slice:":-2" }}
-                                                <span
-                                                        class="pev-price">so'mdan</span></h4>
+                                        <div class="cart-box">
+                                            <button type="button" class="cart-bag" data-bs-toggle="modal"
+                                                    data-bs-target="#modificationModal"
+                                                    data-product-id="{{ product.product_id }}"><i class="iconsax bag"
+                                                                                                  data-icon="basket-2"></i>
+                                            </button>
                                         </div>
+                                    </div>
+                                    <div class="product-box-detail">
+                                        <h4>{{ product.product_name }}</h4>
+                                        <div class="bottom-panel">
+                                            <div class="price">
+                                                <h4>{{ product.price.1|slice:":-2" }}
+                                                    <span
+                                                            class="pev-price">so'm</span></h4>
+                                            </div>
 
-                                        <div class="rating">
-                                            <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
-                                            <h6>4.5</h6>
+                                            <div class="rating">
+                                                <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
+                                                <h6>4.5</h6>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {% else %}
+                            <div class="col-6">
+                                <div class="product-box">
+                                    <div class="product-box-img">
+                                        <a href="/product/{{ product.product_id }}"> <img class="img"
+                                                                                          src="https://joinposter.com{{ product.photo }}"
+                                                                                          alt="p1"/></a>
+
+                                        <div class="cart-box">
+                                            <button type="button" class="cart-bag" data-bs-toggle="modal"
+                                                    data-bs-target="#modificationModal"
+                                                    data-product-id="{{ product.product_id }}"><i class="iconsax bag"
+                                                                                                  data-icon="basket-2"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="product-box-detail">
+                                        <h4>{{ product.product_name }}</h4>
+                                        <div class="bottom-panel">
+                                            <div class="price">
+                                                <h4>{{ product.group_modifications.0.modifications.0.price|slice:":-2" }}
+                                                    <span
+                                                            class="pev-price">so'mdan</span></h4>
+                                            </div>
+
+                                            <div class="rating">
+                                                <img src={% static "assets/images/svg/Star.svg" %} alt="star"/>
+                                                <h6>4.5</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     {% endif %}
                     {% if product.sources.0.visible == 1 and product.group_modifications|length > 1 %}
                         <div class="col-6">
@@ -137,7 +173,7 @@
                                     <h4>{{ product.product_name }}</h4>
                                     <div class="bottom-panel">
 
-                                            <div class="price">
+                                        <div class="price">
                                             <h4>{{ product.price.1|slice:":-2" }}
                                                 <span
                                                         class="pev-price">so'm</span></h4>
@@ -263,14 +299,28 @@
 
                     // Loop through each item in the JSON data
                     if (data['product']['group_modifications']) {
-                        for (item of data['product']['group_modifications'][0]['modifications']) {
-                            console.log(item)
-                            dynamicContent += `
+                        if (data['product']['group_modifications'].length === 1) {
+                            if (data['product']['group_modifications'][0]['num_max'] === data['product']['group_modifications'][0]['num_min']) {
+                                for (item of data['product']['group_modifications'][0]['modifications']) {
+                                    console.log(item)
+                                    dynamicContent += `
         <div class="col-12">
           <div class="shipping-box">
-            <a href="#">
-              <i class="iconsax icons" data-icon="box-tick"></i>
-            </a>
+            <div class="shipping-details">
+              <div class="shipping-info">
+                <h4>${item['name']}</h4>
+                <h5>${String(item['brutto'])} ta</h5>
+              </div>
+            </div>
+          </div>
+        </div>`;
+                                }
+                            } else {
+                                for (item of data['product']['group_modifications'][0]['modifications']) {
+                                    console.log(item)
+                                    dynamicContent += `
+        <div class="col-12">
+          <div class="shipping-box">
             <div class="shipping-details">
               <div class="shipping-info">
                 <h4>${item.name}</h4>
@@ -285,6 +335,23 @@
             </div>
           </div>
         </div>`;
+                                }
+                            }
+                        } else {
+                            for (item of data['product']['group_modifications']) {
+                                console.log(item)
+                                dynamicContent += `
+        <div class="col-12">
+          <div class="shipping-box">
+            <div class="shipping-details">
+              <div class="shipping-info">
+                <h4>${item['modifications'][0].name}</h4>
+                <h5>${String(item['modifications'][0]['brutto'])} ta</h5>
+              </div>
+            </div>
+          </div>
+        </div>`;
+                            }
                         }
                     } else if (data['product']['modifications']) {
                         for (item of data['product']['modifications']) {
