@@ -9,22 +9,22 @@
 // };
 
 
-
 document.addEventListener('DOMContentLoaded', function () {
-        // Get all elements with class "price"
-        var priceElements = document.getElementsByClassName('price-number');
+    // Get all elements with class "price"
+    var priceElements = document.getElementsByClassName('price-number');
 
-        // Loop through each element and reformat the price
-        for (var i = 0; i < priceElements.length; i++) {
-            var price = parseFloat(priceElements[i].textContent.replace(/\s/g, ' ')); // Remove existing spaces
-            priceElements[i].textContent = formatPrice(price);
-        }
+    // Loop through each element and reformat the price
+    for (var i = 0; i < priceElements.length; i++) {
+        var price = parseFloat(priceElements[i].textContent.replace(/\s/g, ' ')); // Remove existing spaces
+        priceElements[i].textContent = formatPrice(price);
+    }
 
-        // Function to format the price with thousands separator
-        function formatPrice(price) {
-            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');// Use browser's built-in toLocaleString for formatting
-        }
-    });
+    // Function to format the price with thousands separator
+    function formatPrice(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');// Use browser's built-in toLocaleString for formatting
+    }
+});
+
 /*======================
 Get cookies
  */
@@ -120,7 +120,6 @@ function handleInputChange(e) {
 rangeInputs.forEach((input) => {
     input.addEventListener("input", handleInputChange);
 });
-
 
 
 /*====================

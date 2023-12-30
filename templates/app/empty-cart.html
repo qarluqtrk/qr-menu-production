@@ -1,19 +1,14 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" href="{% static 'assets/images/afc-logo.png' %}" type="image/x-icon" />
+    <link rel="icon" href='/static/assets/images/afc-logo.png' type="image/x-icon" />
     <title>AFC</title>
-    <link rel="apple-touch-icon" href="{% static 'assets/images/afc-logo.png' %}" />
     <meta name="theme-color" content="#122636" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="fuzzy" />
-    <meta name="msapplication-TileImage" content="{% static 'assets/images/afc-logo.png' %}" />
+    <meta name="msapplication-TileImage" content='/static/assets/images/afc-logo.png' />
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -23,11 +18,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
     <!-- iconsax css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/iconsax.css' %}" />
+    <link rel="stylesheet" href='/static/assets/css/vendors/iconsax.css' />
     <!-- bootstrap css -->
-    <link rel="stylesheet" id="rtl-link" type="text/css" href="{% static 'assets/css/vendors/bootstrap.min.css' %}" />
+    <link rel="stylesheet" id="rtl-link" href='/static/assets/css/vendors/bootstrap.min.css' />
     <!-- Theme css -->
-    <link rel="stylesheet" id="change-link" type="text/css" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" id="change-link" href='/static/assets/css/style.css' />
   </head>
 
   <body>
@@ -47,7 +42,7 @@
     <!-- cart start -->
     <div class="custom-container">
       <div class="empty-tab">
-        <img class="img-fluid empty-img w-100" src="{% static 'assets/images/gif/cart.gif' %}" alt="empty-cart" />
+        <img class="img-fluid empty-img w-100" src='/static/assets/images/gif/cart.gif' alt="empty-cart" />
 
         <h2>Sizning savatingiz bo'sh.</h2>
         <h5 class="mt-3">Sizga mos keladiganini olish uchun bizning eng yaxshi mahsulotlarimizni ko'rib chiqing.</h5>
@@ -58,12 +53,12 @@
     <!-- cart end -->
 
     <!-- iconsax js -->
-    <script src="{% static 'assets/js/iconsax.js' %}"></script>
+    <script src='/static/assets/js/iconsax.js'></script>
 
     <!-- bootstrap js -->
-    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src='/static/assets/js/bootstrap.bundle.min.js'></script>
 
     <!-- script js -->
-    <script src="{% static 'assets/js/script.js' %}"></script>
+    <script src='/static/assets/js/script.js'></script>
   </body>
 </html>
