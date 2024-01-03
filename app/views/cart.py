@@ -27,19 +27,20 @@ def cart_view(request):
                 if "modifications" in product:
                     for modification in product["modifications"]:
                         if int(modification["modificator_id"]) == int(cart_items[cart_item]["modification_id"]):
-                            if modification["sources"][0]["visible"] == True:
-                                cart_details.append(
-                                    {
-                                        "product_id": cart_item,
-                                        "quantity": cart_items[cart_item]["quantity"],
-                                        "modification_id": str(cart_items[cart_item]["modification_id"]),
-                                        "info": product,
-                                    }
-                                )
-                                break
-                            else:
-                                cart.remove(cart_item)
-                                break
+                            if isinstance(product["sources"], list) and product["sources"]:
+                                if modification["sources"][0]["visible"] == True:
+                                    cart_details.append(
+                                        {
+                                            "product_id": cart_item,
+                                            "quantity": cart_items[cart_item]["quantity"],
+                                            "modification_id": str(cart_items[cart_item]["modification_id"]),
+                                            "info": product,
+                                        }
+                                    )
+                                    break
+                                else:
+                                    cart.remove(cart_item)
+                                    break
                 else:
                     if product["sources"][0]["visible"] == True:
                         if "group_modifications" in product:

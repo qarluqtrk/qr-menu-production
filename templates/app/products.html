@@ -283,7 +283,6 @@
                 url: "/product-json/" + productId,
                 success: function (data) {
                     document.getElementById('applyModifications').disabled = true
-                    console.log(data)
                     var dynamicContent = '';
 
                     // Loop through each item in the JSON data
@@ -291,7 +290,6 @@
                         if (data['product']['group_modifications'].length === 1) {
                             if (data['product']['group_modifications'][0]['num_max'] === data['product']['group_modifications'][0]['num_min']) {
                                 for (item of data['product']['group_modifications'][0]['modifications']) {
-                                    console.log(item)
                                     document.getElementById('applyModifications').disabled = false
                                     dynamicContent += `
         <div class="col-12">
@@ -308,7 +306,6 @@
                             } else {
                                 var count = 0;
                                 for (item of data['product']['group_modifications'][0]['modifications']) {
-                                    console.log(item)
                                     dynamicContent += `
         <div class="col-12">
           <div class="shipping-box">
@@ -330,7 +327,6 @@
                             }
                         } else {
                             for (item of data['product']['group_modifications']) {
-                                console.log(item)
                                 document.getElementById('applyModifications').disabled = false
                                 dynamicContent += `
         <div class="col-12">
@@ -348,7 +344,6 @@
                     } else if (data['product']['modifications']) {
                         for (item of data['product']['modifications']) {
                             if (item['sources'][0]['visible'] === 1) {
-                                console.log(item)
                                 dynamicContent += `
         <div class="col-12">
           <div class="shipping-box">

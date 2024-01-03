@@ -9,21 +9,6 @@ class Cart:
             cart = self.session['cart'] = {}
         self.cart = cart
 
-    # def add(self, product_id, modification_id=None, quantity=1):
-    #     productID = str(product_id)
-    #
-    #     # If the productID is not in the cart, create an entry for it
-    #     if productID not in self.cart:
-    #         self.cart[productID] = []
-    #
-    #     # Create a dictionary for the current modification
-    #     modification_data = {'quantity': quantity, 'modification_id': int(modification_id) if modification_id else 0}
-    #
-    #     # Append the modification to the list of modifications for the productID
-    #     self.cart[productID].append(modification_data)
-    #
-    #     self.save()
-
     def add(self, product_id, modification_id=None, quantity=1):
         productID = str(product_id)
         if productID not in self.cart:
@@ -92,36 +77,3 @@ class Cart:
                                     break
 
         return total
-
-    # def get_total_price(self):
-    #     total = 0
-    #     product_cache = {}
-    #     poster_products = poster.get_products()
-    #
-    #     for i in poster_products:
-    #         product_cache[i["product_id"]] = i
-    #
-    #     for product_id, modifications in self.cart.items():
-    #         for item in modifications:
-    #             product = product_cache[product_id]
-    #
-    #             if item["modification_id"] == 0:
-    #                 total += int(product['sources'][0]['price']) * int(item['quantity'])
-    #             else:
-    #                 try:
-    #                     if product["modifications"]:
-    #                         for modification in product["modifications"]:
-    #                             if int(modification['modificator_id']) == int(item["modification_id"]):
-    #                                 total += int(modification['sources'][0]['price']) * int(item['quantity'])
-    #                                 break
-    #                 except:
-    #                     if product["group_modifications"]:
-    #                         if product['category_name'] == "COMBO":
-    #                             total += int(product['price']["1"]) * int(item['quantity'])
-    #                         else:
-    #                             for modification in product["group_modifications"][0]["modifications"]:
-    #                                 if modification['dish_modification_id'] == int(item["modification_id"]):
-    #                                     price = str(modification['price']) + "00"
-    #                                     total += int(price) * int(item['quantity'])
-    #                                     break
-    #     return total
