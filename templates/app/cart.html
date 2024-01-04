@@ -78,6 +78,12 @@
                                                 <li>{{ modification.name }}</li>
                                             {% endif %}
                                         {% endfor %}
+                                    {% elif cart_detail.info.modifications %}
+                                        {% for modification in cart_detail.info.modifications %}
+                                            {% if cart_detail.modification_id == modification.modificator_id %}
+                                                <li>{{ modification.modificator_name }}</li>
+                                            {% endif %}
+                                        {% endfor %}
 
                                     {% endif %}
                                 {% endif %}
@@ -274,7 +280,9 @@
         const addButton = plusMinus[i].querySelector(".add");
         const subButton = plusMinus[i].querySelector(".sub");
         addButton?.addEventListener("click", function () {
+            document.getElementById('cart-total').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
             const inputEl = this.parentNode.querySelector("input[type='number']");
+            document.getElementById(`cart-quantity-${inputEl.getAttribute('data-product-id')}`).innerHTML = `Soni : <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             if (inputEl.value < 10) {
                 inputEl.value = Number(inputEl.value) + 1;
                 $.ajax({
@@ -296,7 +304,9 @@
             }
         });
         subButton?.addEventListener("click", function () {
+            document.getElementById('cart-total').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
             const inputEl = this.parentNode.querySelector("input[type='number']");
+            document.getElementById(`cart-quantity-${inputEl.getAttribute('data-product-id')}`).innerHTML = `Soni : <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             if (inputEl.value > 1) {
                 inputEl.value = Number(inputEl.value) - 1;
                 $.ajax({
@@ -326,14 +336,21 @@
     cartBox?.forEach((el) => {
         const deleteButton = el.querySelector(".trash");
         deleteButton.addEventListener("click", function () {
+            document.getElementById('cart-total').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
             var cart_product_box = this.closest(".cart-product-box")
+            cart_product_box.style.display = "none";
             $.ajax({
                 type: "GET",
                 url: "/delete-cart-item/" + this.getAttribute("data-product-id"),
                 success: function (data) {
-                    console.log(data)
-                    cart_product_box.style.display = "none";
-                    document.getElementById('cart-total').innerHTML = `${String(data['cart_total']).slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm`
+                    if (data['cart_total'] === '0') {
+                        window.location.replace('/cart/')
+                    } else {
+                        document.getElementById('cart-total').innerHTML = `${String(data['cart_total']).slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm`
+                    }
+                },
+                error: function (data) {
+                    cart_product_box.style.display = "block";
                 }
             })
         });

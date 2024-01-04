@@ -15,4 +15,14 @@ def product_view(request, product_id):
 
 def product_info_json(request, product_id):
     product = poster.get_product(product_id)
-    return JsonResponse({'product': product})
+    if "modifications" in product:
+        modifications = product['modifications']
+        return JsonResponse({"type": "ProductModifications", "modifications": modifications})
+    elif "group_modifications" in product:
+        if len(product['group_modifications']) == 1:
+            if product['group_modifications'][0]['type'] == 1:
+                modifications = product['group_modifications'][0]['modifications']
+                return JsonResponse({"type": "DishModifications", "modifications": modifications})
+            else:
+                modifications = product['group_modifications'][0]['modifications']
+                return JsonResponse({"type": "DishModifications", "modifications": modifications})

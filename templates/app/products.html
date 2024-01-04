@@ -280,91 +280,57 @@
 
             $.ajax({
                 type: "GET",
-                url: "/product-json/" + productId,
+                url: "/product-json/" + productId + "/",
                 success: function (data) {
                     document.getElementById('applyModifications').disabled = true
                     var dynamicContent = '';
 
                     // Loop through each item in the JSON data
-                    if (data['product']['group_modifications']) {
-                        if (data['product']['group_modifications'].length === 1) {
-                            if (data['product']['group_modifications'][0]['num_max'] === data['product']['group_modifications'][0]['num_min']) {
-                                for (item of data['product']['group_modifications'][0]['modifications']) {
-                                    document.getElementById('applyModifications').disabled = false
-                                    dynamicContent += `
-        <div class="col-12">
-          <div class="shipping-box">
-            <div class="shipping-details">
-              <div class="shipping-info">
-                <h4>${item['name']}</h4>
-                <h5>${String(item['brutto'])} ta</h5>
-              </div>
-            </div>
-          </div>
-        </div>`;
-                                }
-                            } else {
-                                var count = 0;
-                                for (item of data['product']['group_modifications'][0]['modifications']) {
-                                    dynamicContent += `
-        <div class="col-12">
-          <div class="shipping-box">
-            <div class="shipping-details">
-              <div class="shipping-info">
-                <h4>${item.name}</h4>
-                <h5>${String(item['price']).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm</h5>
-              </div>
-              <div class="price">
-                <div class="form-check form-check-reverse">
-                  <label class="form-check-label" for="radio${item.dish_modification_id}"></label>
-                  <input class="form-check-input" type="radio" name="modification_id" id="radio${item.dish_modification_id}" value="${item.dish_modification_id}"/>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>`;
-                                }
-                            }
-                        } else {
-                            for (item of data['product']['group_modifications']) {
-                                document.getElementById('applyModifications').disabled = false
+                    if (data.type === "ProductModifications") {
+                        for (modification of data['modifications']) {
+                            if (modification['sources'][0]['visible'] === 1) {
                                 dynamicContent += `
         <div class="col-12">
           <div class="shipping-box">
             <div class="shipping-details">
               <div class="shipping-info">
-                <h4>${item['modifications'][0].name}</h4>
-                <h5>${String(item['modifications'][0]['brutto'])} ta</h5>
+                <h4>${modification.modificator_name}</h4>
+                <h5>${String(modification.sources[0]['price']).slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm</h5>
+              </div>
+              <div class="price">
+                <div class="form-check form-check-reverse">
+                  <label class="form-check-label" for="radio${modification.modificator_id}"></label>
+                  <input class="form-check-input" type="radio" name="modification_id" id="radio${modification.modificator_id}" value="${modification.modificator_id}"/>
+                </div>
               </div>
             </div>
           </div>
         </div>`;
                             }
                         }
-                    } else if (data['product']['modifications']) {
-                        for (item of data['product']['modifications']) {
-                            if (item['sources'][0]['visible'] === 1) {
-                                dynamicContent += `
+                    } else if (data.type === "DishModifications") {
+                        for (modification of data['modifications']) {
+                            dynamicContent += `
         <div class="col-12">
           <div class="shipping-box">
             <div class="shipping-details">
               <div class="shipping-info">
-                <h4>${item.modificator_name}</h4>
-                <h5>${String(item.sources[0]['price']).slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm</h5>
+                <h4>${modification.name}</h4>
+                <h5>${String(modification['price']).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} so'm</h5>
               </div>
               <div class="price">
                 <div class="form-check form-check-reverse">
-                  <label class="form-check-label" for="radio${item.dish_modification_id}"></label>
-                  <input class="form-check-input" type="radio" name="modification_id" id="radio${item.dish_modification_id}" value="${item.modificator_id}"/>
+                  <label class="form-check-label" for="radio${modification.dish_modification_id}"></label>
+                  <input class="form-check-input" type="radio" name="modification_id" id="radio${modification.dish_modification_id}" value="${modification.dish_modification_id}"/>
                 </div>
               </div>
             </div>
           </div>
         </div>`;
-                            }
-
                         }
                     }
+
+
                     dynamicContent += `<input type="hidden" value="${productId}" name="product_id" />`
                     // Update the content within the modal
                     dynamicContentContainer.innerHTML = dynamicContent;
@@ -372,7 +338,7 @@
                     // Show the modal
                     myModal.show();
                 },
-                error: function (){
+                error: function () {
                     document.getElementById('applyModifications').disabled = true
                 }
             })

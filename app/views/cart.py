@@ -27,7 +27,6 @@ def cart_view(request):
                 if "modifications" in product:
                     for modification in product["modifications"]:
                         if int(modification["modificator_id"]) == int(cart_items[cart_item]["modification_id"]):
-                            if isinstance(product["sources"], list) and product["sources"]:
                                 if modification["sources"][0]["visible"] == True:
                                     cart_details.append(
                                         {
