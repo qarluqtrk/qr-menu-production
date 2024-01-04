@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 
 from app.utils.poster import poster
 
@@ -15,6 +15,7 @@ def product_view(request, product_id):
 
 def product_info_json(request, product_id):
     product = poster.get_product(product_id)
+    # print(product)
     if "modifications" in product:
         modifications = product['modifications']
         return JsonResponse({"type": "ProductModifications", "modifications": modifications})
@@ -24,5 +25,12 @@ def product_info_json(request, product_id):
                 modifications = product['group_modifications'][0]['modifications']
                 return JsonResponse({"type": "DishModifications", "modifications": modifications})
             else:
-                modifications = product['group_modifications'][0]['modifications']
-                return JsonResponse({"type": "DishModifications", "modifications": modifications})
+                if product["group_modifications"][0]["num_max"] == product["group_modifications"][0]["num_min"]:
+                    modifications = product['group_modifications'][0]['modifications']
+                    return JsonResponse({"type": "Combo", "modifications": modifications})
+                else:
+                    modifications = product['group_modifications'][0]['modifications']
+                    return JsonResponse({"type": "DishModifications", "modifications": modifications})
+        else:
+            modifications = product['group_modifications']
+            return JsonResponse({"type": "Combo_Set", "modifications": modifications})

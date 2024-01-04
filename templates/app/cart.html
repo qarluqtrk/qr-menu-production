@@ -280,10 +280,10 @@
         const addButton = plusMinus[i].querySelector(".add");
         const subButton = plusMinus[i].querySelector(".sub");
         addButton?.addEventListener("click", function () {
-            document.getElementById('cart-total').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
             const inputEl = this.parentNode.querySelector("input[type='number']");
-            document.getElementById(`cart-quantity-${inputEl.getAttribute('data-product-id')}`).innerHTML = `Soni : <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             if (inputEl.value < 10) {
+                document.getElementById('cart-total').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
+                document.getElementById(`cart-quantity-${inputEl.getAttribute('data-product-id')}`).innerHTML = `Soni : <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
                 inputEl.value = Number(inputEl.value) + 1;
                 $.ajax({
                     type: "POST",
@@ -304,10 +304,10 @@
             }
         });
         subButton?.addEventListener("click", function () {
-            document.getElementById('cart-total').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
             const inputEl = this.parentNode.querySelector("input[type='number']");
-            document.getElementById(`cart-quantity-${inputEl.getAttribute('data-product-id')}`).innerHTML = `Soni : <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             if (inputEl.value > 1) {
+                document.getElementById('cart-total').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
+                document.getElementById(`cart-quantity-${inputEl.getAttribute('data-product-id')}`).innerHTML = `Soni : <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
                 inputEl.value = Number(inputEl.value) - 1;
                 $.ajax({
                     type: "POST",
@@ -341,7 +341,7 @@
             cart_product_box.style.display = "none";
             $.ajax({
                 type: "GET",
-                url: "/delete-cart-item/" + this.getAttribute("data-product-id"),
+                url: "/delete-cart-item/" + this.getAttribute("data-product-id") + "/",
                 success: function (data) {
                     if (data['cart_total'] === '0') {
                         window.location.replace('/cart/')
