@@ -27,19 +27,19 @@ def cart_view(request):
                 if "modifications" in product:
                     for modification in product["modifications"]:
                         if int(modification["modificator_id"]) == int(cart_items[cart_item]["modification_id"]):
-                                if modification["sources"][0]["visible"] == True:
-                                    cart_details.append(
-                                        {
-                                            "product_id": cart_item,
-                                            "quantity": cart_items[cart_item]["quantity"],
-                                            "modification_id": str(cart_items[cart_item]["modification_id"]),
-                                            "info": product,
-                                        }
-                                    )
-                                    break
-                                else:
-                                    cart.remove(cart_item)
-                                    break
+                            if modification["sources"][0]["visible"] == True:
+                                cart_details.append(
+                                    {
+                                        "product_id": cart_item,
+                                        "quantity": cart_items[cart_item]["quantity"],
+                                        "modification_id": str(cart_items[cart_item]["modification_id"]),
+                                        "info": product,
+                                    }
+                                )
+                                break
+                            else:
+                                cart.remove(cart_item)
+                                break
                 else:
                     if product["sources"][0]["visible"] == True:
                         if "group_modifications" in product:
@@ -120,15 +120,27 @@ def delete_cart_item(request, product_id):
 def make_order(request):
     cart = Cart(request)
     cart_items = cart.get_cart()
+    poster_products = poster.get_products()
+    poster_products_dict = {}
+    for i in poster_products:
+        poster_products_dict[i["product_id"]] = i
 
     products = []
     for cart_item in cart_items:
         if cart_items[f"{cart_item}"]['modification_id'] == 0:
             products.append({"product_id": cart_item, "count": cart_items[cart_item]['quantity']})
         else:
-            products.append({"product_id": cart_item,
-                             "modification": [{"m": str(cart_items[f"{cart_item}"]["modification_id"]), "a": 1}, ],
-                             "count": cart_items[cart_item]['quantity']})
+            product = poster_products_dict[cart_item]
+            if "modifications" in product:
+                products.append({
+                    "product_id": cart_item,
+                    "modificator_id": str(cart_items[f"{cart_item}"]["modification_id"]),
+                    "count": cart_items[cart_item]['quantity'],
+                })
+            else:
+                products.append({"product_id": cart_item,
+                                 "modification": [{"m": str(cart_items[f"{cart_item}"]["modification_id"]), "a": 1}, ],
+                                 "count": cart_items[cart_item]['quantity']})
     table_id = request.session.get('table_id')
     if not table_id:
         return JsonResponse({"status": "error", "message": "'table_id' not found in session"})

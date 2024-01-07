@@ -59,21 +59,18 @@ class Cart:
             if item["modification_id"] == 0:
                 total += int(product['sources'][0]['price']) * int(item['quantity'])
             else:
-                try:
+                if 'modifications' in product:
                     if product["modifications"]:
                         for modification in product["modifications"]:
                             if int(modification['modificator_id']) == int(item["modification_id"]):
                                 total += int(modification['sources'][0]['price']) * int(item['quantity'])
                                 break
-                except:
+                elif 'group_modifications' in product:
                     if product["group_modifications"]:
-                        if product['category_name'] == "COMBO":
-                            total += int(product['price']["1"]) * int(item['quantity'])
-                        else:
-                            for modification in product["group_modifications"][0]["modifications"]:
-                                if modification['dish_modification_id'] == int(item["modification_id"]):
-                                    price = str(modification['price']) + "00"
-                                    total += int(price) * int(item['quantity'])
-                                    break
+                        for modification in product["group_modifications"][0]["modifications"]:
+                            if modification['dish_modification_id'] == int(item["modification_id"]):
+                                price = str(modification['price']) + "00"
+                                total += int(price) * int(item['quantity'])
+                                break
 
         return total
