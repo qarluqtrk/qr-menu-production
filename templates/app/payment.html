@@ -51,15 +51,14 @@
     <div class="custom-container">
 
 
-
-
-
-        <form class="address-form" action="{% url 'payment' %}" method="post" target="_blank" onsubmit="formatExpiryDate()">
+        <form id="paymentForm" class="address-form" action="{% url 'payment' %}" method="post" target="_blank"
+              onsubmit="formatExpiryDate()">
             {% csrf_token %}
             <div class="form-group">
                 <label class="form-label">Karta Raqam</label>
                 <div class="form-input mb-3">
-                    <input type="text" id="cardNumberInput" name="card_number" class="form-control" placeholder="0000 0000 0000 0000"
+                    <input type="text" id="cardNumberInput" name="card_number" class="form-control"
+                           placeholder="0000 0000 0000 0000"
                            oninput="formatCardNumber()" onkeypress="validateCardNumber(event)" maxlength="19" required/>
                 </div>
             </div>
@@ -68,7 +67,8 @@
                 <div class="form-group">
                     <label class="form-label">Exp. Date</label>
                     <div class="form-input mb-3">
-                        <input type="text" id="expiryDateInput" name="expiry_date" class="form-control" placeholder="mm/yy"
+                        <input type="text" id="expiryDateInput" name="expiry_date" class="form-control"
+                               placeholder="mm/yy"
                                oninput="formatExpiryDate()" onkeypress="validateExpiryDate(event)" pattern="\d{2}/\d{2}"
                                required/>
                     </div>
@@ -77,10 +77,36 @@
 
             <button type="submit" class="btn theme-btn mt-5 w-100">Yuborish</button>
         </form>
-
-
-
-
+        <div class="otp-verification" id="otp-verify" style="display: none">
+            <h4>We have sent a verification code to</h4>
+            <h4 id="smsnum" class="otp-number mt-2">+91 635 546 23098</h4>
+        </div>
+        <form id="otpForm" class="otp-form" action="{% url 'payment' %}" method="post" hidden>
+            <div class="form-input dark-border-gradient">
+                <input type="number" class="form-control active" placeholder="0" id="five1"
+                       onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)"/>
+            </div>
+            <div class="form-input dark-border-gradient">
+                <input type="number" class="form-control" placeholder="0" id="five2" onkeyup="onKeyUpEvent(2, event)"
+                       onfocus="onFocusEvent(2)"/>
+            </div>
+            <div class="form-input dark-border-gradient">
+                <input type="number" class="form-control" placeholder="0" id="five3" onkeyup="onKeyUpEvent(3, event)"
+                       onfocus="onFocusEvent(3)"/>
+            </div>
+            <div class="form-input dark-border-gradient">
+                <input type="number" class="form-control" placeholder="0" id="five4" onkeyup="onKeyUpEvent(4, event)"
+                       onfocus="onFocusEvent(4)"/>
+            </div>
+            <div class="form-input dark-border-gradient">
+                <input type="number" class="form-control" placeholder="0" id="five5" onkeyup="onKeyUpEvent(5, event)"
+                       onfocus="onFocusEvent(5)"/>
+            </div>
+            <div class="form-input dark-border-gradient">
+                <input type="number" class="form-control" placeholder="0" id="five6" onkeyup="onKeyUpEvent(6, event)"
+                       onfocus="onFocusEvent(6)"/>
+            </div>
+        </form>
 
     </div>
 </section>
@@ -95,5 +121,31 @@
 
 <!-- script js -->
 <script src="{% static 'assets/js/script.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(function () {
+        $('#paymentForm').on('submit', function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: '/payment/',
+                type: 'POST',
+                action: 'pay',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        console.log(response.success);
+                        $('#paymentForm').hide();
+                        $('#smsnum').text(response['phone']);
+                        $('#otp-verify').show();
+                        $('#otpForm').prop('hidden', false);
+                    }
+
+                }
+            });
+        });
+    });
+</script>
+<script src="{% static 'assets/js/otp.js' %}"></script>
 </body>
 </html>

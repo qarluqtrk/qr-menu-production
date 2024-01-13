@@ -119,22 +119,22 @@ SESSION_EXPIRE_SECONDS = 60 * 30
 SESSION_TIMEOUT_REDIRECT = '/'
 
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': 'error.log',  # Specify the path to your log file
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'ERROR',
+#             'class': 'logging.FileHandler',
+#             'filename': 'error.log',  # Specify the path to your log file
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'ERROR',
+#             'propagate': True,
+#         },
+#     },
+# }
 

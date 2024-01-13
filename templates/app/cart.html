@@ -160,7 +160,9 @@
         <h6>Umumiy narx</h6>
         <h2 id="cart-total"><span class="price-number">{{ cart_total|slice:":-2" }}</span> so'm</h2>
     </div>
-    <a href="#success" class="btn btn-lg theme-btn pay-btn mt-0">Jo'natish</a>
+    <button type="button" class="btn btn-lg theme-btn pay-btn mt-0" data-bs-toggle="modal" data-bs-target="#myModal">
+        Jo'natish
+    </button>
 </div>
 <!-- cart bottom end -->
 
@@ -187,48 +189,70 @@
         </div>
     </div>
 </div>
-
+<div class="modal" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">To'lov Turini tanlang</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="shipping-box">
+                            <a href="#">
+                                <i class="iconsax icons" data-icon="box-tick"></i>
+                            </a>
+                            <div class="shipping-details">
+                                <div class="shipping-info">
+                                    <h4>Ketayotganda to'lash</h4>
+                                </div>
+                                <div class="price">
+                                    <div class="form-check form-check-reverse">
+                                        <input class="form-check-input" type="radio" name="exampleRadio" id="radio1"
+                                               value="option2" checked/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="shipping-box">
+                            <a href="#">
+                                <i class="iconsax icons" data-icon="package"></i>
+                            </a>
+                            <div class="shipping-details">
+                                <div class="shipping-info">
+                                    <h4>Karta orqali to'lash</h4>
+                                </div>
+                                <div class="price">
+                                    <div class="form-check form-check-reverse">
+                                        <input class="form-check-input" type="radio" name="exampleRadio" id="radio2"
+                                               value="option2"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn theme-btn w-100 mt-4" id="send_order">Jo'natish</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <!-- iconsax js -->
 <script src="/static/assets/js/iconsax.js"></script>
 
 <!-- bootstrap js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="/static/assets/js/bootstrap.bundle.min.js"></script>
 
 <!-- script js -->
 <script src="/static/assets/js/script.js"></script>
-{#<script>#}
-{#    // Function to show the success modal#}
-{#    function showSuccessModal() {#}
-{#        $('#success').modal('show');  // Assuming you are using Bootstrap modal#}
-{#    }#}
-{##}
-{##}
-{#    function showErrorAlert(message) {#}
-{#        alert(message);#}
-{#    }#}
-{##}
-{#    // Event handler for the "Jo'natish" link click#}
-{#    $(document).ready(function () {#}
-{#        $('a[href="#success"]').click(function (e) {#}
-{#            $.ajax({#}
-{#                type: "GET",#}
-{#                url: "/make-order/",#}
-{#                success: function (data) {#}
-{#                    e.preventDefault();  // Prevent the default behavior of the link#}
-{##}
-{#                    if (data.status === "success") {#}
-{#                        showSuccessModal();   // Call the function to show the success modal#}
-{#                    } else if (data.status === "error") {#}
-{#                        showErrorAlert(data.message);  // Call the function to show the error alert#}
-{#                    }#}
-{#                }#}
-{#            });#}
-{#        });#}
-{#    });#}
-{#</script>#}
-
 
 <script>
     // Function to show the success modal
@@ -240,10 +264,18 @@
         alert(message);
     }
 
-    // Event handler for the "Jo'natish" link click
-    $(document).ready(function () {
-        $('a[href="#success"]').click(function (e) {
-            // Check if table_id exists in the session
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the modal element
+        var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+
+        // Get the send_order button
+        var sendOrderButton = document.getElementById('send_order');
+
+        // Add a click event listener to the send_order button
+        sendOrderButton.addEventListener('click', function (e) {
+            // Check which radio button is selected
+            var radio1 = document.getElementById('radio1');
+            var radio2 = document.getElementById('radio2');
             if (!checkTableIdInSession()) {
                 showErrorAlert("Siz faqat qr-menu orqali buyurtma berishingiz mumkin !" +
                     "Iltimos qr-menu orqali qayta buyurtma bering !");
@@ -252,25 +284,44 @@
                 return;
             }
 
-            $.ajax({
-                type: "GET",
-                url: "/make-order/",
-                success: function (data) {
-                    e.preventDefault();  // Prevent the default behavior of the link
+            if (radio2.checked) {
+                // Perform actions when the first radio button is selected
+                console.log("Karta orqali to'lash is selected");
+                window.location.replace("/payment/");
 
-                    if (data.status === "success") {
-                        showSuccessModal();   // Call the function to show the success modal
-                    } else if (data.status === "error") {
-                        showErrorAlert(data.message);  // Call the function to show the error alert
+                // Add your custom logic here
+            } else if (radio1.checked) {
+                // Perform actions when the second radio button is selected
+                console.log("Ketayotganda to'lash is selected");
+
+                // Add your custom logic here
+
+                $.ajax({
+                    type: "GET",
+                    url: "/make-order/",
+                    success: function (data) {
+                        e.preventDefault();  // Prevent the default behavior of the link
+
+                        if (data.status === "success") {
+                            myModal.hide()
+                            showSuccessModal();   // Call the function to show the success modal
+                        } else if (data.status === "error") {
+                            showErrorAlert(data.message);  // Call the function to show the error alert
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle AJAX errors here
+                        console.error(xhr.responseText);
                     }
-                },
-                error: function (xhr, status, error) {
-                    // Handle AJAX errors here
-                    console.error(xhr.responseText);
-                }
-            });
+                });
+            }
+
+            // Close the modal after handling the button selection
+            myModal.hide();
         });
     });
+    // Event handler for the "Jo'natish" link click
+
 
     // Function to check if 'table_id' exists in the session
     function checkTableIdInSession() {

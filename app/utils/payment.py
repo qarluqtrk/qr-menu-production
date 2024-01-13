@@ -4,15 +4,17 @@ import requests
 
 
 class PaymentProcessor:
-    def __init__(self, username, password, card_number, expiry_date):
-        self.username = username
-        self.password = password
+    def __init__(self, card_number, expiry_date):
+        self.phone_number = None
+        self.username = "test_merchant@gmail.com"
+        self.password = "test_password"
         self.card_number = card_number
         self.expiry_date = expiry_date
-        self.auth_token = None
-        self.card_token = None
+        self.auth_token = self.get_access_token()
+        self.card_token = self.create_card_token()
         self.external_id = str(uuid.uuid4())
         self.payment_id = None
+
 
     def get_access_token(self):
         url = 'https://sso-selectel-dev.globalpay.uz/realms/globalpay/protocol/openid-connect/token'
@@ -25,7 +27,8 @@ class PaymentProcessor:
             'scope': 'openid'
         }
         response = requests.post(url, data=data)
-        self.auth_token = response.json().get('access_token')
+        auth_token = response.json().get('access_token')
+        return auth_token
 
     def create_card_token(self):
         card_url = 'https://gateway-api-dev.globalpay.uz/cards/v1/card'
@@ -35,8 +38,10 @@ class PaymentProcessor:
         }
         headers = {'Authorization': 'Bearer ' + self.auth_token, 'Content-Type': 'application/json'}
         card_response = requests.post(url=card_url, headers=headers, json=card_data)
-        self.card_token = card_response.json().get('cardToken')
-        print(f"CardToken : {self.card_token}")
+        self.phone_number = card_response.json().get('smsNotificationNumber')
+        print(card_response.json().get('smsNotificationNumber'))
+        card_token = card_response.json().get('cardToken')
+        return card_token
 
     def confirm_card(self):
         otp_code = input('Enter OTP: ')
@@ -44,6 +49,9 @@ class PaymentProcessor:
         confirm_data = {'code': otp_code}
         headers = {'Authorization': 'Bearer ' + self.auth_token, 'Content-Type': 'application/json'}
         confirm_response = requests.post(url=confirm_url, headers=headers, json=confirm_data)
+        print(confirm_response)
+        self.payment_id = self.init_payment()
+        self.perform_payment()
 
     def init_payment(self):
         init_url = "https://gateway-api-dev.globalpay.uz/payments/v1/payment/init"
@@ -51,14 +59,14 @@ class PaymentProcessor:
             "externalId": f"{self.external_id}",
             "serviceId": 303,
             "paymentFields": [
-                {"value": "100000", "name": "amount"},
+                {"value": "200000", "name": "amount"},
                 {"value": "UZS", "name": "currency"}
             ]
         }
         headers = {'Authorization': 'Bearer ' + self.auth_token, 'Content-Type': 'application/json'}
         init_response = requests.post(url=init_url, headers=headers, json=init_data)
-        self.payment_id = init_response.json().get('id')
-        print(f"PaymentID : {self.payment_id}")
+        payment_id = init_response.json().get('id')
+        return payment_id
 
     def perform_payment(self):
         perform_url = "https://gateway-api-dev.globalpay.uz/payments/v1/payment/perform"
@@ -73,3 +81,9 @@ class PaymentProcessor:
 
 
 # Example usage:
+#
+# payment = PaymentProcessor('9860090101219724', '2610')
+# print(payment.auth_token)
+# print('cart token' + payment.card_token)
+# payment.confirm_card()
+# print(payment.payment_id)

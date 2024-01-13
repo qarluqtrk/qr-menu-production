@@ -5,7 +5,7 @@ function getCodeBoxElement(index) {
 function onKeyUpEvent(index, event) {
   const eventCode = event.which || event.keyCode;
   if (getCodeBoxElement(index).value.length === 1) {
-    if (index !== 5) {
+    if (index !== 6) {
       getCodeBoxElement(index + 1).focus();
     } else {
       getCodeBoxElement(index).blur();
@@ -13,7 +13,7 @@ function onKeyUpEvent(index, event) {
       console.log("submit code ");
     }
   }
-  if (eventCode === 5 && index !== 1) {
+  if (eventCode === 6 && index !== 1) {
     getCodeBoxElement(index - 1).focus();
   }
 }
