@@ -3,6 +3,8 @@ from django.urls import path
 from app.views.cart import cart_view, add_to_cart, change_quantity, delete_cart_item, add_to_cart_post, make_order, \
     empty_cart_view
 from app.views.index import index_view
+from app.views.otp import otp_view
+from app.views.payment import payment_view
 from app.views.product import product_view, product_info_json
 from app.views.products import products_view
 from app.views.table_manager import table_manager
@@ -24,6 +26,28 @@ urlpatterns = [
     path('add-to-cart-post/', add_to_cart_post, name='add-to-cart-post'),
     path('make-order/', make_order, name='make-order'),
     path('table_manager/<int:table_id>/', table_manager, name='table_manager'),
+
+    # payment
+    path('payment/', payment_view, name='payment'),
+    path('otp/', otp_view, name='otp'),
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

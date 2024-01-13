@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="icon" href='/static/assets/images/afc-logo.png' type="image/x-icon"/>
+    <title>AFC</title>
+    <link rel="apple-touch-icon" href='/static/assets/images/afc-logo.png'/>
+    <meta name="theme-color" content="#122636"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-title" content="fuzzy"/>
+    <meta name="msapplication-TileImage" content='/static/assets/images/afc-logo.png'/>
+    <meta name="msapplication-TileColor" content="#FFFFFF"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <!--Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"/>
+
+    <!-- iconsax css -->
+    <link rel="stylesheet" href='/static/assets/css/vendors/iconsax.css'/>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" id="rtl-link" href='/static/assets/css/vendors/bootstrap.min.css'/>
+    <!-- Theme css -->
+    <link rel="stylesheet" id="change-link" href='/static/assets/css/style.css'/>
+
+</head>
+
+
+<body class="auth-body" style="background-color:white ">
+<!-- otp section start -->
+<br><br>
+<div class="auth-img">
+    <img class="img-fluid auth-bg"  src="{% static 'assets/images/afc-logo-small-2.png' %}" alt="auth_bg"/>
+
+                    <br><br><br><br><br>
+
+    <div class="auth-content">
+        <div>
+            <h2 style="color: #EC000F">OTP tekshiruvi</h2>
+        </div>
+    </div>
+</div>
+
+<div class="custom-container">
+    <div class="otp-verification">
+        <h4 style="background-color: white">Biz tasdiqlash kodini yubordik</h4>
+        <h4 class="otp-number mt-2">+91 635 546 23098</h4>
+    </div>
+    <form class="otp-form">
+        <div class="form-input dark-border-gradient">
+            <input type="number" class="form-control active" placeholder="0" id="five1" onkeyup="onKeyUpEvent(1, event)"
+                   onfocus="onFocusEvent(1)"/>
+        </div>
+        <div class="form-input dark-border-gradient">
+            <input type="number" class="form-control" placeholder="0" id="five2" onkeyup="onKeyUpEvent(2, event)"
+                   onfocus="onFocusEvent(2)"/>
+        </div>
+        <div class="form-input dark-border-gradient">
+            <input type="number" class="form-control" placeholder="0" id="five3" onkeyup="onKeyUpEvent(3, event)"
+                   onfocus="onFocusEvent(3)"/>
+        </div>
+        <div class="form-input dark-border-gradient">
+            <input type="number" class="form-control" placeholder="0" id="five4" onkeyup="onKeyUpEvent(4, event)"
+                   onfocus="onFocusEvent(4)"/>
+        </div>
+        <div class="form-input dark-border-gradient">
+            <input type="number" class="form-control" placeholder="0" id="five5" onkeyup="onKeyUpEvent(5, event)"
+                   onfocus="onFocusEvent(5)"/>
+        </div>
+    </form>
+    <a href="#" style="background-color: #203342;color: white" class="btn auth-btn w-100" role="button">Tasdiqlash</a>
+</div>
+<!-- otp section end -->
+
+<!-- otp js -->
+<script src="{% static 'assets/js/otp.js' %}"></script>
+
+<!-- iconsax js -->
+<script src="{% static 'assets/js/iconsax.js' %}"></script>
+
+<!-- bootstrap js -->
+<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- script js -->
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+</html>

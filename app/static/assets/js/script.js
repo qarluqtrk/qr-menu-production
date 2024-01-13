@@ -43,6 +43,60 @@ function getCookie(name) {
     return null;
 }
 
+
+/*=====================
+    Payment added start
+==========================*/
+
+
+/*=====================
+    Payment added end
+==========================*/
+
+function formatCardNumber() {
+    let input = document.getElementById('cardNumberInput');
+    let value = input.value.replace(/\s/g, ''); // Remove spaces
+    let formattedValue = '';
+
+    for (let i = 0; i < value.length; i++) {
+        if (i > 0 && i % 4 === 0) {
+            formattedValue += ' '; // Add space after every 4 digits
+        }
+        formattedValue += value[i];
+    }
+
+    input.value = formattedValue;
+}
+
+function validateCardNumber(event) {
+    let charCode = event.which || event.keyCode;
+    let charTyped = String.fromCharCode(charCode);
+
+    if (isNaN(charTyped) || charTyped.toLowerCase() === 'e') {
+        event.preventDefault(); // Prevent entering non-numeric characters and the letter 'e'
+    }
+}
+
+function formatExpiryDate() {
+    let input = document.getElementById('expiryDateInput');
+    let value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
+
+    if (value.length > 2) {
+        // Take only the first 4 characters (mm/yy format)
+        input.value = value.slice(0, 2) + '/' + value.slice(2, 4);
+    }
+}
+
+function validateExpiryDate(event) {
+    let charCode = event.which || event.keyCode;
+    let charTyped = String.fromCharCode(charCode);
+
+    // Allow only numeric characters and the slash character, and restrict to a maximum of 5 characters (including the slash)
+    if (!/^\d$|^\d\d$|^\d\d\/$|^\d\d\/\d$/.test(charTyped) || (charTyped === '/' && event.target.value.length >= 5)) {
+        event.preventDefault();
+    }
+}
+
 /*=====================
     wishlist added start
 ==========================*/
