@@ -15,7 +15,6 @@ class PaymentProcessor:
         self.external_id = str(uuid.uuid4())
         self.payment_id = None
 
-
     def get_access_token(self):
         url = 'https://sso-selectel-dev.globalpay.uz/realms/globalpay/protocol/openid-connect/token'
         data = {
@@ -43,13 +42,15 @@ class PaymentProcessor:
         card_token = card_response.json().get('cardToken')
         return card_token
 
-    def confirm_card(self):
-        otp_code = input('Enter OTP: ')
+    def confirm_card(self, otp):
+        otp_code = otp
         confirm_url = f'https://gateway-api-dev.globalpay.uz/cards/v1/card/confirm/{self.card_token}'
-        confirm_data = {'code': otp_code}
+        confirm_data = {'code': 1}
         headers = {'Authorization': 'Bearer ' + self.auth_token, 'Content-Type': 'application/json'}
         confirm_response = requests.post(url=confirm_url, headers=headers, json=confirm_data)
-        print(confirm_response)
+        print(otp_code)
+        print(type(otp_code))
+        print(confirm_response.json())
         self.payment_id = self.init_payment()
         self.perform_payment()
 
@@ -78,7 +79,6 @@ class PaymentProcessor:
         headers = {'Authorization': 'Bearer ' + self.auth_token, 'Content-Type': 'application/json'}
         perform_response = requests.post(url=perform_url, headers=headers, json=perform_data)
         print(perform_response.json())
-
 
 # Example usage:
 #

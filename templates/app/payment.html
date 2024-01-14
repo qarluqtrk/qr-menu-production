@@ -74,6 +74,7 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="step" value="1">
 
             <button type="submit" class="btn theme-btn mt-5 w-100">Yuborish</button>
         </form>
@@ -82,6 +83,7 @@
             <h4 id="smsnum" class="otp-number mt-2">+91 635 546 23098</h4>
         </div>
         <form id="otpForm" class="otp-form" action="{% url 'payment' %}" method="post" hidden>
+            {% csrf_token %}
             <div class="form-input dark-border-gradient">
                 <input type="number" class="form-control active" placeholder="0" id="five1"
                        onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)"/>
@@ -106,6 +108,8 @@
                 <input type="number" class="form-control" placeholder="0" id="five6" onkeyup="onKeyUpEvent(6, event)"
                        onfocus="onFocusEvent(6)"/>
             </div>
+            <input type="hidden" name="step" value="2">
+            <input id="otpInput" type="hidden" name="otp" value="0">
         </form>
 
     </div>
@@ -126,11 +130,12 @@
     $(function () {
         $('#paymentForm').on('submit', function (event) {
             event.preventDefault();
+            console.log($(this).serialize())
             $.ajax({
                 url: '/payment/',
                 type: 'POST',
                 action: 'pay',
-                data: $(this).serialize(),
+                data: $(this).serialize() ,
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
