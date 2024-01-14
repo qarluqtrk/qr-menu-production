@@ -4,12 +4,13 @@ import requests
 
 
 class PaymentProcessor:
-    def __init__(self, card_number, expiry_date):
+    def __init__(self, card_number, expiry_date, cart_total):
         self.phone_number = None
         self.username = "test_merchant@gmail.com"
         self.password = "test_password"
         self.card_number = card_number
         self.expiry_date = expiry_date
+        self.cart_total = cart_total
         self.auth_token = self.get_access_token()
         self.card_token = self.create_card_token()
         self.external_id = str(uuid.uuid4())
@@ -60,7 +61,7 @@ class PaymentProcessor:
             "externalId": f"{self.external_id}",
             "serviceId": 303,
             "paymentFields": [
-                {"value": "200000", "name": "amount"},
+                {"value": f"{self.cart_total}", "name": "amount"},
                 {"value": "UZS", "name": "currency"}
             ]
         }

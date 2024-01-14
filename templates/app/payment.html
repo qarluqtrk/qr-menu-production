@@ -50,7 +50,6 @@
 <section class="section-b-space">
     <div class="custom-container">
 
-
         <form id="paymentForm" class="address-form" action="{% url 'payment' %}" method="post" target="_blank"
               onsubmit="formatExpiryDate()">
             {% csrf_token %}
@@ -144,8 +143,13 @@
                         $('#smsnum').text(response['phone']);
                         $('#otp-verify').show();
                         $('#otpForm').prop('hidden', false);
+                    }else {
+                        window.alert("Ma'lumot xato kiritildi.Iltimos qayta kiriting !");
                     }
 
+                },
+                error:function (response){
+                        window.alert("Ichki xatolik sodir bo'ldi !");
                 }
             });
         });
