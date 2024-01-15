@@ -46,7 +46,7 @@ class PaymentProcessor:
     def confirm_card(self, otp):
         otp_code = otp
         confirm_url = f'https://gateway-api-dev.globalpay.uz/cards/v1/card/confirm/{self.card_token}'
-        confirm_data = {'code': 1}
+        confirm_data = {'code': otp_code}
         headers = {'Authorization': 'Bearer ' + self.auth_token, 'Content-Type': 'application/json'}
         confirm_response = requests.post(url=confirm_url, headers=headers, json=confirm_data)
         print(otp_code)

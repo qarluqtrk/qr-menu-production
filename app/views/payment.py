@@ -25,7 +25,7 @@ def payment_view(request):
 
         else:
             return JsonResponse({"success": False})
-    if request.POST.get('step') == '2':
+    elif request.POST.get('step') == '2':
         print('step 2')
         payment_obj.confirm_card(otp=request.POST.get('otp'))
         return redirect('index')
