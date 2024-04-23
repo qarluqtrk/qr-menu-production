@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link rel="icon" href='/static/assets/images/afc-logo.png' type="image/x-icon"/>
+    <link rel="icon" href="{% static 'assets/images/afc-logo.png' %}" type="image/x-icon"/>
     <title>AFC</title>
-    <link rel="apple-touch-icon" href='/static/assets/images/afc-logo.png'/>
+    <link rel="apple-touch-icon" href="{% static 'assets/images/afc-logo.png' %}"/>
     <meta name="theme-color" content="#122636"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="apple-mobile-web-app-title" content="fuzzy"/>
-    <meta name="msapplication-TileImage" content='/static/assets/images/afc-logo.png'/>
+    <meta name="msapplication-TileImage" content="{% static 'assets/images/afc-logo.png' %}"/>
     <meta name="msapplication-TileColor" content="#FFFFFF"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
@@ -25,11 +25,11 @@
           rel="stylesheet"/>
 
     <!-- iconsax css -->
-    <link rel="stylesheet" href='/static/assets/css/vendors/iconsax.css'/>
+    <link rel="stylesheet" href="{% static 'assets/css/vendors/iconsax.css' %}"/>
     <!-- bootstrap css -->
-    <link rel="stylesheet" id="rtl-link" href='/static/assets/css/vendors/bootstrap.min.css'/>
+    <link rel="stylesheet" id="rtl-link" href="{% static 'assets/css/vendors/bootstrap.min.css' %}"/>
     <!-- Theme css -->
-    <link rel="stylesheet" id="change-link" href='/static/assets/css/style.css'/>
+    <link rel="stylesheet" id="change-link" href="{% static 'assets/css/style.css' %}"/>
 </head>
 
 <body>
@@ -43,7 +43,7 @@
             <h3>{{ products.0.category_name }}</h3>
             <a href="/cart/" class="notification">
                 <div class="icon">
-                    <img src="/static/assets/images/svg/bag-fill.svg" alt="bag"/>
+                    <img src="{% static "assets/images/svg/bag-fill.svg" %}" alt="bag"/>
                 </div>
             </a>
         </div>
@@ -287,14 +287,22 @@
     </div>
 </div>
 
-<!-- iconsax js -->
-<script src="/static/assets/js/iconsax.js"></script>
+<script src="{% static "assets/js/iconsax.js" %}"></script>
+<script src="{% static "assets/js/custom-swiper.js" %}"></script>
+<script src="{% static "assets/js/dropzone-min.js" %}"></script>
+<script src="{% static "assets/js/homescreen-popup.js" %}"></script>
+<script src="{% static "assets/js/offcanvas-popup.js" %}"></script>
+<script src="{% static "assets/js/onload-modal.js" %}"></script>
+<script src="{% static "assets/js/otp.js" %}"></script>
+<script src="{% static "assets/js/range-slider.js" %}"></script>
+<script src="{% static "assets/js/swiper-bundle.min.js" %}"></script>
 
 <!-- bootstrap js -->
-<script src="/static/assets/js/bootstrap.bundle.min.js"></script>
+<script src="{% static "assets/js/bootstrap.bundle.min.js" %}"></script>
 
 <!-- script js -->
-<script src="/static/assets/js/script.js"></script>
+<script src="{% static "assets/js/script.js" %}"></script>
+
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 

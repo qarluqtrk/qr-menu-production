@@ -1,0 +1,425 @@
+Internal Server Error: /products/5/
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/lib/python3.10/socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 210, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x753ad049bd30>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getProducts?token=472870:3753009f61fee30ba59200931ef0d699&category_id=5 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x753ad049bd30>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/views/products.py", line 7, in products_view
+    products = poster.get_products(category_id)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/utils/poster.py", line 27, in get_products
+    response = requests.get(url).json()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getProducts?token=472870:3753009f61fee30ba59200931ef0d699&category_id=5 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x753ad049bd30>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)"))
+"GET /products/5/ HTTP/1.1" 500 168045
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/lib/python3.10/socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 210, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x78c2e6f353f0>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getCategories?token=472870:3753009f61fee30ba59200931ef0d699 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x78c2e6f353f0>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/views/index.py", line 7, in index_view
+    categories = poster.get_categories()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/utils/poster.py", line 11, in get_categories
+    response = requests.get(url).json()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getCategories?token=472870:3753009f61fee30ba59200931ef0d699 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x78c2e6f353f0>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)"))
+"GET / HTTP/1.1" 500 145
+Internal Server Error: /products/5/
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/lib/python3.10/socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 210, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x78c2e6efde70>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getProducts?token=472870:3753009f61fee30ba59200931ef0d699&category_id=5 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x78c2e6efde70>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/views/products.py", line 7, in products_view
+    products = poster.get_products(category_id)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/utils/poster.py", line 27, in get_products
+    response = requests.get(url).json()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getProducts?token=472870:3753009f61fee30ba59200931ef0d699&category_id=5 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x78c2e6efde70>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)"))
+"GET /products/5/ HTTP/1.1" 500 145
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/lib/python3.10/socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 210, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x78c2e5e685b0>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getCategories?token=472870:3753009f61fee30ba59200931ef0d699 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x78c2e5e685b0>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/views/index.py", line 7, in index_view
+    categories = poster.get_categories()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/utils/poster.py", line 11, in get_categories
+    response = requests.get(url).json()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getCategories?token=472870:3753009f61fee30ba59200931ef0d699 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x78c2e5e685b0>: Failed to resolve 'joinposter.com' ([Errno -3] Temporary failure in name resolution)"))
+"GET / HTTP/1.1" 500 145
+Internal Server Error: /cart/
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x78c2e6ecce20>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getProducts?token=472870:3753009f61fee30ba59200931ef0d699 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x78c2e6ecce20>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/views/cart.py", line 16, in cart_view
+    poster_products = poster.get_products()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/utils/poster.py", line 22, in get_products
+    response = requests.get(url).json()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getProducts?token=472870:3753009f61fee30ba59200931ef0d699 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x78c2e6ecce20>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x78c2e6efcee0>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getCategories?token=472870:3753009f61fee30ba59200931ef0d699 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x78c2e6efcee0>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/views/index.py", line 7, in index_view
+    categories = poster.get_categories()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/utils/poster.py", line 11, in get_categories
+    response = requests.get(url).json()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getCategories?token=472870:3753009f61fee30ba59200931ef0d699 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x78c2e6efcee0>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+OSError: [Errno 101] Network is unreachable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1096, in _validate_conn
+    conn.connect()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connection.py", line 218, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x78c2e5e30490>: Failed to establish a new connection: [Errno 101] Network is unreachable
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getCategories?token=472870:3753009f61fee30ba59200931ef0d699 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x78c2e5e30490>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/views/index.py", line 7, in index_view
+    categories = poster.get_categories()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/app/utils/poster.py", line 11, in get_categories
+    response = requests.get(url).json()
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/oxunjon/PycharmProjects/qr-menu-production/venv/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='joinposter.com', port=443): Max retries exceeded with url: /api/menu.getCategories?token=472870:3753009f61fee30ba59200931ef0d699 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x78c2e5e30490>: Failed to establish a new connection: [Errno 101] Network is unreachable'))
+"GET / HTTP/1.1" 500 145

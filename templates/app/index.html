@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="icon" href='/static/assets/images/afc-logo.png' type="image/x-icon" />
+    <link rel="icon" href="{% static 'assets/images/afc-logo.png' %}" type="image/x-icon"/>
     <title>AFC</title>
-    <link rel="apple-touch-icon" href='/static/assets/images/afc-logo.png' />
-    <meta name="theme-color" content="#122636" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="fuzzy" />
-    <meta name="msapplication-TileImage" content='/static/assets/images/afc-logo.png' />
-    <meta name="msapplication-TileColor" content="#FFFFFF" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="apple-touch-icon" href="{% static 'assets/images/afc-logo.png' %}"/>
+    <meta name="theme-color" content="#122636"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-title" content="fuzzy"/>
+    <meta name="msapplication-TileImage" content="{% static 'assets/images/afc-logo.png' %}"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <!--Google font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"/>
 
     <!-- iconsax css -->
-    <link rel="stylesheet" href='/static/assets/css/vendors/iconsax.css' />
+    <link rel="stylesheet" href="{% static 'assets/css/vendors/iconsax.css' %}"/>
     <!-- bootstrap css -->
-    <link rel="stylesheet" id="rtl-link" href='/static/assets/css/vendors/bootstrap.min.css' />
+    <link rel="stylesheet" id="rtl-link" href="{% static 'assets/css/vendors/bootstrap.min.css' %}"/>
     <!-- Theme css -->
-    <link rel="stylesheet" id="change-link" href='/static/assets/css/style.css' />
-  </head>
+    <link rel="stylesheet" id="change-link" href="{% static 'assets/css/style.css' %}"/>
+</head>
 
 <body>
 <!-- header start -->
@@ -38,7 +39,7 @@
             <h3>Menyu</h3>
             <a href="/cart/" class="notification">
                 <div class="icon">
-                    <img src="/static/assets/images/svg/bag-fill.svg" alt="bag"/>
+                    <img src="{% static "assets/images/svg/bag-fill.svg" %}" alt="bag"/>
                 </div>
             </a>
         </div>
@@ -51,20 +52,21 @@
     <div class="custom-container">
         <ul class="categories-list">
             {% for category in categories %}
-            	<li style="border-bottom-left-radius: 16px">
-                <a href="products/{{ category.category_id }}/" class="d-flex align-items-center">
-                    <div class="ps-3">
-                        <h2>{{ category.category_name }}</h2>
-                        <div class="arrow">
-                            <i class="iconsax right-arrow" data-icon="arrow-right"></i>
+                <li style="border-bottom-left-radius: 16px">
+                    <a href="products/{{ category.category_id }}/" class="d-flex align-items-center">
+                        <div class="ps-3">
+                            <h2>{{ category.category_name }}</h2>
+                            <div class="arrow">
+                                <i class="iconsax right-arrow" data-icon="arrow-right"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="categories-img">
-                        <img class="img-fluid categories img"
-                             src="https://joinposter.com{{ category.category_photo }}" alt="p21" style="object-fit: cover; border-top-right-radius: 16px"/>
-                    </div>
-                </a>
-            </li>
+                        <div class="categories-img">
+                            <img class="img-fluid categories img"
+                                 src="https://joinposter.com{{ category.category_photo }}" alt="p21"
+                                 style="object-fit: cover; border-top-right-radius: 16px"/>
+                        </div>
+                    </a>
+                </li>
             {% endfor %}
 
         </ul>
@@ -75,14 +77,22 @@
 <!-- panel-space start -->
 <section class="panel-space"></section>
 <!-- panel-space end -->
-
-<!-- iconsax js -->
-<script src="/static/assets/js/iconsax.js"></script>
+<script src="{% static "assets/js/iconsax.js" %}"></script>
+<script src="{% static "assets/js/custom-swiper.js" %}"></script>
+<script src="{% static "assets/js/dropzone-min.js" %}"></script>
+<script src="{% static "assets/js/homescreen-popup.js" %}"></script>
+<script src="{% static "assets/js/offcanvas-popup.js" %}"></script>
+<script src="{% static "assets/js/onload-modal.js" %}"></script>
+<script src="{% static "assets/js/otp.js" %}"></script>
+<script src="{% static "assets/js/range-slider.js" %}"></script>
+<script src="{% static "assets/js/swiper-bundle.min.js" %}"></script>
 
 <!-- bootstrap js -->
-<script src="/static/assets/js/bootstrap.bundle.min.js"></script>
+<script src="{% static "assets/js/bootstrap.bundle.min.js" %}"></script>
 
 <!-- script js -->
-<script src="/static/assets/js/script.js"></script>
+<script src="{% static "assets/js/script.js" %}"></script>
+
+
 </body>
 </html>

@@ -1,64 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% load static %}
 
-    <link rel="icon" href='/static/assets/images/afc-logo.png' type="image/x-icon" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="icon" href="{% static 'assets/images/afc-logo.png' %}" type="image/x-icon"/>
     <title>AFC</title>
-    <meta name="theme-color" content="#122636" />
-    <meta name="msapplication-TileImage" content='/static/assets/images/afc-logo.png' />
-    <meta name="msapplication-TileColor" content="#FFFFFF" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#122636"/>
+    <meta name="msapplication-TileImage" content="{% static 'assets/images/afc-logo.png' %}"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <!--Google font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"/>
 
     <!-- iconsax css -->
-    <link rel="stylesheet" href='/static/assets/css/vendors/iconsax.css' />
+    <link rel="stylesheet" href="{% static 'assets/css/vendors/iconsax.css' %}"/>
     <!-- bootstrap css -->
-    <link rel="stylesheet" id="rtl-link" href='/static/assets/css/vendors/bootstrap.min.css' />
+    <link rel="stylesheet" id="rtl-link" href="{% static 'assets/css/vendors/bootstrap.min.css' %}"/>
     <!-- Theme css -->
-    <link rel="stylesheet" id="change-link" href='/static/assets/css/style.css' />
-  </head>
+    <link rel="stylesheet" id="change-link" href="{% static 'assets/css/style.css' %}"/>
+</head>
 
-  <body>
-    <!-- header start -->
-    <header class="section-t-space">
-      <div class="custom-container">
-        <div class="header-panel">
-          <a href="{% url 'index' %}">
-            <i class="iconsax back-btn" data-icon="arrow-left"></i>
-          </a>
-          <h3>Mening savatim</h3>
-        </div>
-      </div>
-    </header>
-    <!-- header end -->
-
-    <!-- cart start -->
+<body>
+<!-- header start -->
+<header class="section-t-space">
     <div class="custom-container">
-      <div class="empty-tab">
-        <img class="img-fluid empty-img w-100" src='/static/assets/images/gif/cart.gif' alt="empty-cart" />
+        <div class="header-panel">
+            <a href="{% url 'index' %}">
+                <i class="iconsax back-btn" data-icon="arrow-left"></i>
+            </a>
+            <h3>Mening savatim</h3>
+        </div>
+    </div>
+</header>
+<!-- header end -->
+
+<!-- cart start -->
+<div class="custom-container">
+    <div class="empty-tab">
+        <img class="img-fluid empty-img w-100" src="{% static 'assets/images/gif/cart.gif' %}" alt="empty-cart"/>
 
         <h2>Sizning savatingiz bo'sh.</h2>
         <h5 class="mt-3">Sizga mos keladiganini olish uchun bizning eng yaxshi mahsulotlarimizni ko'rib chiqing.</h5>
 
         <a href="{% url 'index' %}" class="btn theme-btn w-100 mt-3 mb-3" role="button">Xarid Qilishni Boshlang</a>
-      </div>
     </div>
-    <!-- cart end -->
+</div>
+<!-- cart end -->
 
-    <!-- iconsax js -->
-    <script src='/static/assets/js/iconsax.js'></script>
+<script src="{% static "assets/js/iconsax.js" %}"></script>
+<script src="{% static "assets/js/custom-swiper.js" %}"></script>
+<script src="{% static "assets/js/dropzone-min.js" %}"></script>
+<script src="{% static "assets/js/homescreen-popup.js" %}"></script>
+<script src="{% static "assets/js/offcanvas-popup.js" %}"></script>
+<script src="{% static "assets/js/onload-modal.js" %}"></script>
+<script src="{% static "assets/js/otp.js" %}"></script>
+<script src="{% static "assets/js/range-slider.js" %}"></script>
+<script src="{% static "assets/js/swiper-bundle.min.js" %}"></script>
 
-    <!-- bootstrap js -->
-    <script src='/static/assets/js/bootstrap.bundle.min.js'></script>
+<!-- bootstrap js -->
+<script src="{% static "assets/js/bootstrap.bundle.min.js" %}"></script>
 
-    <!-- script js -->
-    <script src='/static/assets/js/script.js'></script>
-  </body>
+<!-- script js -->
+<script src="{% static "assets/js/script.js" %}"></script>
+
+
+</body>
 </html>
